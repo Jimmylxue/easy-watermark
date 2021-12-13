@@ -1,0 +1,12 @@
+{
+"presets": [
+    [
+    "@babel/preset-env",
+    {
+        "corejs": 2,
+        "useBuiltIns": "usage"
+    }
+    ],
+    "@babel/preset-typescript" // 继承支持 typescript语法
+]
+}
