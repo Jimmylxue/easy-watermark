@@ -7,6 +7,20 @@
     <title>Document</title>
   </head>
   <body>
-    <script src="./main.js"></script>
+    <script src="watermark.js"></script>
+    <script src="watermark.min.js"></script>
+    <!-- <img id="img" src="http://www.jimmyxuexue.top/bg.jpg" alt="" /> -->
+    <img id="img2" alt="" />
+    <script>
+      let img = document.getElementById("img");
+      let img2 = document.getElementById("img2");
+      // console.log(waterMarker("http://www.jimmyxuexue.top/bg.jpg"));
+      waterMarker("http://jimmyxx.oss-cn-beijing.aliyuncs.com/dark.jpg").then(
+        (res) => {
+          console.log("res", res);
+          img2.src = res;
+        }
+      );
+    </script>
   </body>
 </html>
