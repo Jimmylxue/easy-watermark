@@ -15,12 +15,15 @@
       let img = document.getElementById("img");
       let img2 = document.getElementById("img2");
       // console.log(waterMarker("http://www.jimmyxuexue.top/bg.jpg"));
-      waterMarker("http://jimmyxx.oss-cn-beijing.aliyuncs.com/dark.jpg").then(
-        (res) => {
-          console.log("res", res);
-          img2.src = res;
-        }
-      );
+      let config = {
+        src: "http://jimmyxx.oss-cn-beijing.aliyuncs.com/xuexue.png",
+        text: "叶思豪",
+        color: "#bdc3c7",
+      };
+      waterMarker(config).then((res) => {
+        console.log("res", res);
+        img2.src = res;
+      });
     </script>
   </body>
 </html>

@@ -1,14 +1,12 @@
-interface config {
-  src: string; // 图片地址
-  text: string; // 水印文字
-}
-export default function imgWaterMarker(src: string, text: string) {
+import { configParams } from "./baseInterface";
+
+export default function imgWaterMarker(config: configParams) {
+  console.log(config);
   return new Promise((resolve, reject) => {
     let img = new Image();
     img.setAttribute("crossOrigin", "");
-    img.src = src;
-    console.log(img, "img");
-    console.log(img);
+    img.src = config.src;
+    console.log("img", img);
     img.onload = () => {
       const width = img.width;
       const height = img.height;
@@ -18,23 +16,16 @@ export default function imgWaterMarker(src: string, text: string) {
       canvas.height = height;
       const ctx = canvas.getContext("2d"); // 画笔
       ctx.drawImage(img, 0, 0, width, height);
-      // console.log(draw, img);
-      // ctx.fillStyle = "#2ecc71";
-      // ctx.fill();
-      // ctx.font = "40px bold italic Courier New";
       ctx.font = "40px bold italic arial";
       let lineGradient = ctx.createLinearGradient(100, 200, 200, 200);
-      // lineGradient.addColorStop(0, "#f1c40f");
-      lineGradient.addColorStop(1, "#CCC");
+      lineGradient.addColorStop(1, config.color || "#ccc");
       console.log("123456");
-      // ctx.font = "bold italic 160px arial";
       ctx.shadowBlur = 10;
       ctx.shadowOffsetX = 20;
       ctx.shadowOffsetY = 20;
       ctx.fillStyle = lineGradient;
       // ctx.rotate((350 * Math.PI) / 180);
-      ctx.fillText("Jimmyxuexue", width - 250, height - 100);
-
+      ctx.fillText(config.text || "Jimmy定制", width - 190, height - 170);
       resolve(canvas.toDataURL("image/jpeg"));
     };
 
