@@ -24,7 +24,7 @@ export default function imgWaterMarker(config: configParams) {
       drawText(
         ctx,
         config.text,
-        config.position,
+        config.position || "right-bottom",
         config.padding,
         width,
         height
