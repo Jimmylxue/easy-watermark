@@ -3,10 +3,10 @@
  *  根据用户的环境  输出不同的包
  */
 
-'use strict';
+"use strict";
 
-if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./dist/add-number.min.js');
+if (process.env.NODE_ENV === "production") {
+  module.exports = require("./dist/watermark.min.js");
 } else {
-  module.exports = require('./dist/add-number.js');
+  module.exports = require("./dist/watermark.js");
 }
