@@ -60,6 +60,13 @@ module.exports = {
     minimizer: [
       new TenserWebpackPlugin({
         test: /\.min\.js$/, // 只针对 .min.js进行压缩
+        terserOptions: {
+          compress: {
+            drop_console: true,
+            drop_debugger: false,
+            pure_funcs: ["console.log"], // 移除console
+          },
+        },
       }),
     ], // 压缩的方式  -- 使用 terser-webpack-plugin 压缩工具
   },
