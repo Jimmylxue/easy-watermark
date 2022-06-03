@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>watermark</title>
-  </head>
-  <body>
-    <script src="watermark.js"></script>
-    <script src="watermark.min.js"></script>
-    <img id="img2" alt="" />
-    <script>
-      let img = document.getElementById("img");
-      let img2 = document.getElementById("img2");
-      let config = {
-        src: "http://jimmyxx.oss-cn-beijing.aliyuncs.com/lot.png",
-        text: "叶思豪",
-        color: "#bdc3c7",
-        size: 40,
-        position: "center",
-        padding: 10,
-      };
-      waterMarker(config).then((res) => {
-        img2.src = res;
-      });
-    </script>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>watermark</title>
+	</head>
+	<body>
+		<script src="watermark.js"></script>
+		<script src="watermark.min.js"></script>
+		<img id="img2" alt="" />
+		<script>
+			let img = document.getElementById('img')
+			let img2 = document.getElementById('img2')
+			let config = {
+				src: 'http://jimmyxx.oss-cn-beijing.aliyuncs.com/lot.png',
+				text: '叶思豪',
+				color: '#bdc3c7',
+				size: 40,
+				position: 'center',
+				padding: 10,
+				rotate: 45,
+			}
+			waterMarker(config).then(res => {
+				img2.src = res
+			})
+		</script>
+	</body>
 </html>
