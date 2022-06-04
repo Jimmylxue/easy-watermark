@@ -111,16 +111,21 @@ function drawText(
 			break
 	}
 	if (rotate) {
+		/**
+		 * 旋转角度的逻辑：
+		 * 	先设置旋转点，旋转角度之后写上字
+		 * 	再将旋转点转回
+		 */
 		const rectCenterPoint = {
 			x: positionWidth + textMsg.width / 2,
 			y: positionHeight + textMsg.height / 2,
 		}
 		ctx.translate(rectCenterPoint.x, rectCenterPoint.y)
-		ctx.rotate(rotate)
+		ctx.rotate((rotate * Math.PI) / 180) // 处理旋转角度
 		ctx.translate(-rectCenterPoint.x, -rectCenterPoint.y)
-		ctx.fillText(text || 'Jimmy定制', positionWidth, positionHeight)
+		ctx.fillText(text || 'watermark', positionWidth, positionHeight)
 		return
 	}
-	ctx.fillText(text || 'Jimmy定制', positionWidth, positionHeight)
+	ctx.fillText(text || 'watermark', positionWidth, positionHeight)
 	// 后面两个数值表示从哪里开始画 如这里是从x = 100 y = 200开始画
 }

@@ -9,20 +9,17 @@ export interface configParams {
 	color: string // 水印颜色
 	padding: number // 文字距离图片的边距
 	output: string // 输出类型 目前支持 png jpeg
-	position: string // 水印方位
+	position:
+		| 'left-top'
+		| 'left-center'
+		| 'left-bottom'
+		| 'center-top'
+		| 'center'
+		| 'center-bottom'
+		| 'right-top'
+		| 'right-center'
+		| 'right-bottom' // 水印方位
 	rotate?: number // 角度
-	/**
-	 * 水印方位
-	 * left-top （左上）
-	 * left-center （左中）
-	 * left-botom （左下）
-	 * center-top （中上）
-	 * center （正中）
-	 * center-bottom （中下）
-	 * right-top （右上）
-	 * right-center （右中）
-	 * right-bottom （右下）
-	 */
 }
 
 export interface textBound {
