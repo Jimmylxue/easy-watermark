@@ -20,6 +20,7 @@ export interface configParams {
 		| 'right-center'
 		| 'right-bottom' // 水印方位
 	rotate?: number // 角度
+	type: 'fill' | 'stroke'
 }
 
 export interface textBound {

@@ -5,7 +5,17 @@ import BaseError, { warn, error } from './error'
 export default function imgWaterMarker(config: configParams) {
 	return new Promise((resolve, reject) => {
 		checkConfig(config, reject)
-		const { src, text, size, color, padding, output, position, rotate } = config
+		const {
+			src,
+			text,
+			size,
+			color,
+			padding,
+			output,
+			position,
+			rotate,
+			type = 'fill',
+		} = config
 		let img = new Image()
 		img.setAttribute('crossOrigin', '')
 		img.src = src
@@ -15,12 +25,13 @@ export default function imgWaterMarker(config: configParams) {
 			const canvas = document.createElement('canvas')
 			canvas.width = width
 			canvas.height = height
-			const ctx = canvas.getContext('2d') // 画笔
+			const ctx: CanvasRenderingContext2D = canvas.getContext('2d')! // 画笔
 			ctx.drawImage(img, 0, 0, width, height)
 			ctx.font = `${size || 20}px bold italic arial`
 			let lineGradient = ctx.createLinearGradient(100, 200, 200, 200)
 			lineGradient.addColorStop(1, color || '#ccc')
 			ctx.fillStyle = lineGradient
+			// alert(type)
 			drawText(
 				ctx,
 				text,
@@ -28,6 +39,7 @@ export default function imgWaterMarker(config: configParams) {
 				padding,
 				width,
 				height,
+				type,
 				rotate
 			)
 			resolve(canvas.toDataURL(`image/${output}||jpeg`))
@@ -63,6 +75,7 @@ function drawText(
 	padding: number = 30,
 	width: number,
 	height: number,
+	type: 'fill' | 'stroke',
 	rotate?: number
 ): void {
 	let textMsg = getTextBound(ctx, text || 'Jimmy定制')
@@ -123,9 +136,12 @@ function drawText(
 		ctx.translate(rectCenterPoint.x, rectCenterPoint.y)
 		ctx.rotate((rotate * Math.PI) / 180) // 处理旋转角度
 		ctx.translate(-rectCenterPoint.x, -rectCenterPoint.y)
-		ctx.fillText(text || 'watermark', positionWidth, positionHeight)
-		return
 	}
-	ctx.fillText(text || 'watermark', positionWidth, positionHeight)
+	if (type === 'fill') {
+		ctx.fillText(text || 'watermark', positionWidth, positionHeight)
+	} else {
+		ctx.strokeText(text || 'watermark', positionWidth, positionHeight)
+	}
+
 	// 后面两个数值表示从哪里开始画 如这里是从x = 100 y = 200开始画
 }

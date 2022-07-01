@@ -79,6 +79,7 @@ cnpm i esay-watermark (推荐)
 | padding  | number | yes | 水印距离图片边缘的距离，默认 30               |
 | output   | string | yes | 输出图片类型 支持 `jpeg`和`png` ，默认 `jpeg` |
 | position | Position | yes | 水印所处位置，默认 right-bottom（右下）       |
+| type | 'fill'\|'stroke' | no | 文字的“填充模式”和“描边模式”（默认填充模式） |
 | rotate | number | no | 旋转角度       |
 
 其中Position属性具有以下属性值：
@@ -100,6 +101,10 @@ cnpm i esay-watermark (推荐)
 - [x] 新增 rotate 旋转角度
 
   > 2022.06.02 更新
+  
+- [x] 新增 type 文字书写方式 “描边”|“填充”
+
+  > 2022.07.01 更新
 
 ## 敬请期待
 
