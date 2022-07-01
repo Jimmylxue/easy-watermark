@@ -2,7 +2,7 @@
  * 公共接口类型
  */
 
-export interface configParams {
+export interface ConfigParams {
 	src: string // 图片地址
 	text: string // 水印文字
 	size: number // 水印文字字号
@@ -38,4 +38,10 @@ export const enum Position {
 	RIGHT_TOP,
 	RIGHT_CENTER,
 	RIGHT_BOTTOM,
+}
+
+export interface MosaicConfig {
+	src: string
+	output?: string
+	size?: number
 }

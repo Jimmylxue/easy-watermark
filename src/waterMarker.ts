@@ -1,9 +1,11 @@
-import { configParams, Position } from './baseInterface'
+import { ConfigParams, Position } from './type/baseInterface'
+import { createImgInstance } from './core/imgInstance'
+import { createCanvas } from './core/canvasInstance'
 import { getTextBound, getPositionType } from './utils'
-import BaseError, { warn, error } from './error'
+import BaseError, { warn, error } from './core/error'
 
-export default function imgWaterMarker(config: configParams) {
-	return new Promise((resolve, reject) => {
+export function imgWaterMarker(config: ConfigParams): Promise<string> {
+	return new Promise(async (resolve, reject) => {
 		checkConfig(config, reject)
 		const {
 			src,
@@ -16,43 +18,35 @@ export default function imgWaterMarker(config: configParams) {
 			rotate,
 			type = 'fill',
 		} = config
-		let img = new Image()
-		img.setAttribute('crossOrigin', '')
-		img.src = src
-		img.onload = () => {
-			const width = img.width
-			const height = img.height
-			const canvas = document.createElement('canvas')
-			canvas.width = width
-			canvas.height = height
-			const ctx: CanvasRenderingContext2D = canvas.getContext('2d')! // 画笔
-			ctx.drawImage(img, 0, 0, width, height)
-			ctx.font = `${size || 20}px bold italic arial`
-			let lineGradient = ctx.createLinearGradient(100, 200, 200, 200)
-			lineGradient.addColorStop(1, color || '#ccc')
-			ctx.fillStyle = lineGradient
-			// alert(type)
-			drawText(
-				ctx,
-				text,
-				position || 'right-bottom',
-				padding,
-				width,
-				height,
-				type,
-				rotate
-			)
-			resolve(canvas.toDataURL(`image/${output}||jpeg`))
-		}
-		img.onerror = () => {
-			error('注意-一个无法打开的图片资源')
-			throw new BaseError(3, '一个无法打开的图片资源')
-		}
+		const img = await createImgInstance({
+			source: src,
+			onError: () => error('注意-一个无法打开的图片资源'),
+		})
+		const { canvas, ctx } = createCanvas()
+		const { width, height } = img
+		canvas.width = width
+		canvas.height = height
+		ctx.drawImage(img, 0, 0, width, height)
+		ctx.font = `${size || 20}px bold italic arial`
+		let lineGradient = ctx.createLinearGradient(100, 200, 200, 200)
+		lineGradient.addColorStop(1, color || '#ccc')
+		ctx.fillStyle = lineGradient
+		drawText(
+			ctx,
+			text,
+			position || 'right-bottom',
+			padding,
+			width,
+			height,
+			type,
+			rotate
+		)
+		resolve(canvas.toDataURL(`image/${output}||jpeg`))
 	})
 }
 
 // 检查参数是否完整
-function checkConfig(config: configParams, reject) {
+function checkConfig(config: ConfigParams, reject) {
 	if (!config.src) {
 		error('请输入图片地址')
 		reject('请输入图片地址')

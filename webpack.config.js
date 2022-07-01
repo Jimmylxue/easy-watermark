@@ -9,8 +9,8 @@ const TenserWebpackPlugin = require('terser-webpack-plugin')
 
 module.exports = {
 	entry: {
-		watermark: './src/main.ts',
-		'watermark.min': './src/main.ts',
+		watermark: './src/index.ts',
+		'watermark.min': './src/index.ts',
 	},
 	output: {
 		filename: '[name].js',

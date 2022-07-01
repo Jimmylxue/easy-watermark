@@ -4,15 +4,25 @@ watermark 是一个基于 canvas 的简单的生成自定义水印的插件，�
 
 GitHub: [传送门](https://github.com/Jimmylxue/easy-watermark)
 
-> issues 是第一生产动力！😄
+> issues 是第一生产力！😄
 
-## DEMO
+知识星球：[传送门](http://www.jimmyxuexue.top)
+
+> 进去看看？
+
+## 效果
+
+**marker 水印效果**
 
 ![image-20220604104010832](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220604104010832.png)
 
 ![demo](http://jimmyxx.oss-cn-beijing.aliyuncs.com/demo.png)
 
 ![demo](http://jimmyxx.oss-cn-beijing.aliyuncs.com/demo2.png)
+
+**mosaic 马赛克效果**
+
+![image-20220701233625989](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220701233625989.png)
 
 ## 快速开始
 
@@ -26,19 +36,24 @@ cnpm i esay-watermark (推荐)
 
 #### 基本使用
 
-- 在 vue 中使用
+- 在框架中使用
+
+  > Vue的demo，react和其他框架同理
 
   ```vue
   <template>
   	<img alt="Vue logo" :src="imgurl" />
   </template>
-
+  
   <script setup>
   import { ref } from 'vue'
-  import waterMarker from 'esay-watermark'
-
-  const imgurl = ref('')
-  waterMarker({
+  import { marker, mosaic } from 'esay-watermark'
+  
+  const imgUrl = ref('')
+  const imgUrl2 = ref('')
+  
+  // 水印效果
+  marker({
   	src: 'https://img1.baidu.com/it/u=128307009,2094083535&fm=26&fmt=auto',
   	text: 'jimmy',
   	color: '#bdc3c7',
@@ -46,6 +61,14 @@ cnpm i esay-watermark (推荐)
   	position: 'center',
   	padding: 10,
   }).then(res => (imgurl.value = res))
+  
+  // 马赛克效果
+  mosaic({
+  	src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
+  	size: 5,
+  }).then(source => {
+  	img.src = source
+  })
   </script>
   ```
 
@@ -54,25 +77,41 @@ cnpm i esay-watermark (推荐)
   ```html
   <body>
   	<script src="./watermark.min.js"></script>
-  	<img id="img2" alt="" />
+  	<img id="img2" alt="水印效果" />
+		<img id="img" alt="马赛克效果" />
   	<script>
-  		let img2 = document.getElementById('img2')
-  		let config = {
+			const { marker, mosaic } = waterMarker
+			const img = document.getElementById('img')
+  		const img2 = document.getElementById('img2')
+			// 制作水印
+  		const config = {
   			src: 'http://jimmyxx.oss-cn-beijing.aliyuncs.com/lot.png',
-  			text: 'jimmy',
-  			color: '#bdc3c7',
-  			size: 40,
-  			position: 'center',
-  			padding: 10,
+				text: 'easy-watermark',
+				color: '#bdc3c7',
+				size: 40,
+				position: 'center',
+				padding: 10,
+				rotate: -15,
+				type: 'stroke',
   		}
-  		waterMarker(config).then(res => {
+  		marker(config).then(res => {
   			img2.src = res
   		})
+
+			// 制作马赛克效果
+			mosaic({
+				src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
+				size: 5,
+			}).then(source => {
+				img.src = source
+			})
   	</script>
   </body>
   ```
 
 ## API
+
+**marker 水印API**
 
 | 属性名   | 类型   | 是否必填   | 描述                          |
 | -------- | ------ | ------ | --------------------------------------------- |
@@ -81,7 +120,7 @@ cnpm i esay-watermark (推荐)
 | color    | string | yes | 水印颜色                                      |
 | size     | number | yes | 水印文字大小，默认 20                         |
 | padding  | number | yes | 水印距离图片边缘的距离，默认 30               |
-| output   | string | yes | 输出图片类型 支持 `jpeg`和`png` ，默认 `jpeg` |
+| output   | 'jpeg' \| 'png' | yes | 输出图片类型 支持 `jpeg`和`png` ，默认 `jpeg` |
 | position | Position | yes | 水印所处位置，默认 right-bottom（右下）       |
 | type | 'fill'\|'stroke' | no | 文字的“填充模式”和“描边模式”（默认填充模式） |
 | rotate | number | no | 旋转角度       |
@@ -100,6 +139,14 @@ cnpm i esay-watermark (推荐)
 | right-center    | 右中 |
 | right-bottom    | 右下 |
 
+**mosaic 马赛克API**
+
+| 属性名   | 类型   | 是否必填   | 描述                          |
+| -------- | ------ | ------ | --------------------------------------------- |
+| src      | string | yes | 图片地址（必填）                              |
+| size | number \| string | no | 模糊力度，越大越模糊（默认10） |
+| output | 'jpeg' \| 'png' | no | 导出图片类型（默认jpeg）                |
+
 ## 更新日志
 
 - [x] 新增 rotate 旋转角度
@@ -109,6 +156,10 @@ cnpm i esay-watermark (推荐)
 - [x] 新增 type 文字书写方式 “描边”|“填充”
 
   > 2022.07.01 更新
+  
+- [x] 新增 `mosaic ` 图片转马赛克
+
+  > 2022.07.02 更新
 
 ## 敬请期待
 
