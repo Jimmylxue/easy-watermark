@@ -1,4 +1,4 @@
-import { textBound, Position } from './baseInterface'
+import { textBound, Position } from './type/baseInterface'
 
 // 获取文字的宽高
 export const getTextBound = (
@@ -14,7 +14,7 @@ export const getTextBound = (
 
 // 获取方位
 export const getPositionType = (position): number => {
-	let flag = null
+	let flag: any
 	switch (position) {
 		case 'left-top':
 			flag = Position.LEFT_TOP
