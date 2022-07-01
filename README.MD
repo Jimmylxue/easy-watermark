@@ -2,6 +2,10 @@
 
 watermark 是一个基于 canvas 的简单的生成自定义水印的插件，轻量、灵活、配置简单是它的特点。
 
+GitHub: [传送门](https://github.com/Jimmylxue/easy-watermark)
+
+> issues 是第一生产动力！😄
+
 ## DEMO
 
 ![image-20220604104010832](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220604104010832.png)
