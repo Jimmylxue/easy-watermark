@@ -8,7 +8,7 @@ GitHub: [传送门](https://github.com/Jimmylxue/easy-watermark)
 
 知识星球：[传送门](http://www.jimmyxuexue.top)
 
-> 进去看看？
+> 大兄弟们聚过来，这件事很重要🎉🎉🎉
 
 ## 效果
 
@@ -163,6 +163,6 @@ cnpm i esay-watermark (推荐)
 
 ## 敬请期待
 
-日后这个库会不定期更新....
+日后这个库会不定期更新😁....
 
-同时也期待有小伙伴一起维护整个小玩具~
+期待小伙伴们的star和PR🤞🤞🤞
