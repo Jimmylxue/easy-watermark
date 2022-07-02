@@ -13,7 +13,7 @@ export const getTextBound = (
 }
 
 // 获取方位
-export const getPositionType = (position): number => {
+export const getPositionType = (position: string): number => {
 	let flag: any
 	switch (position) {
 		case 'left-top':

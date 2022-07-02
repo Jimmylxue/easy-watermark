@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>watermark</title>
+	</head>
+	<body>
+		<script src="watermark.js"></script>
+		<script src="watermark.min.js"></script>
+		<img id="img2" alt="" />
+		<br />
+		<img
+			id="img3"
+			src="https://avatars.githubusercontent.com/u/65758455?v=4"
+			alt=""
+		/>
+		<span>size:5 =></span>
+		<img id="img" alt="" />
+		<span>size:15 =></span>
+
+		<img id="img4" alt="" />
+
+		<script>
+			let img = document.getElementById('img')
+			let img2 = document.getElementById('img2')
+			let img4 = document.getElementById('img4')
+			const { marker, mosaic } = waterMarker
+			console.log(mosaic)
+			let config = {
+				src: 'http://jimmyxx.oss-cn-beijing.aliyuncs.com/lot.png',
+				text: 'easy-watermark',
+				color: '#bdc3c7',
+				size: 40,
+				position: 'center',
+				padding: 10,
+				rotate: -15,
+				type: 'stroke',
+			}
+			marker(config).then(res => {
+				img2.src = res
+			})
+
+			mosaic({
+				src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
+				size: 5,
+			}).then(source => {
+				img.src = source
+			})
+
+			mosaic({
+				src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
+				size: 15,
+			}).then(source => {
+				img4.src = source
+			})
+		</script>
+	<script src="watermark.js"></script><script src="watermark.min.js"></script></body>
+</html>

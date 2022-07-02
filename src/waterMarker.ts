@@ -46,7 +46,7 @@ export function imgWaterMarker(config: ConfigParams): Promise<string> {
 }
 
 // 检查参数是否完整
-function checkConfig(config: ConfigParams, reject) {
+function checkConfig(config: ConfigParams, reject: (reason?: any) => void) {
 	if (!config.src) {
 		error('请输入图片地址')
 		reject('请输入图片地址')
