@@ -1,7 +1,2 @@
-import { imgWaterMarker } from './waterMarker'
-import { mosaic } from './mosaic'
-
-export default {
-	marker: imgWaterMarker,
-	mosaic,
-}
+export { imgWaterMarker } from './waterMarker'
+export { mosaic } from './mosaic'

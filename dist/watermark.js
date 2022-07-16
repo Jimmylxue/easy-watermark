@@ -476,12 +476,11 @@ var __webpack_exports__ = {};
 var exports = __webpack_exports__;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.mosaic = exports.imgWaterMarker = void 0;
 var waterMarker_1 = __webpack_require__(1);
+Object.defineProperty(exports, "imgWaterMarker", ({ enumerable: true, get: function () { return waterMarker_1.imgWaterMarker; } }));
 var mosaic_1 = __webpack_require__(6);
-exports["default"] = {
-    marker: waterMarker_1.imgWaterMarker,
-    mosaic: mosaic_1.mosaic,
-};
+Object.defineProperty(exports, "mosaic", ({ enumerable: true, get: function () { return mosaic_1.mosaic; } }));
 
 })();
 
