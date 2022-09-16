@@ -45,3 +45,9 @@ export interface MosaicConfig {
 	output?: string
 	size?: number
 }
+
+export interface BlurConfig {
+	src: string
+	output?: string
+	radius?: number // 模糊半径
+}
