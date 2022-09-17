@@ -1,8 +1,8 @@
-import { BlurConfig } from './type/baseInterface'
-import { createImgInstance } from './core/imgInstance'
-import { createCanvas } from './core/canvasInstance'
-import { error } from './core/error'
-import { gaussBlur } from './utils'
+import { BlurConfig } from '../types/baseInterface'
+import { createImgInstance } from '../instance/imgInstance'
+import { createCanvas } from '../instance/canvasInstance'
+import { error } from '../exception/error'
+import { gaussBlur } from '../utils/utils'
 
 export function blur({ src, output = 'jpeg', radius = 5 }: BlurConfig) {
 	return new Promise(async (resolve, reject) => {

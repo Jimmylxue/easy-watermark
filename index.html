@@ -30,7 +30,7 @@
 
 			<img
 				id="blur1"
-				alt=""
+				alt="blur"
 				src="https://avatars.githubusercontent.com/u/65758455?v=4"
 			/>
 			<span>size:5 =></span>
@@ -39,14 +39,24 @@
 			<img id="blur3" alt="" />
 		</div>
 
+		<div class="qrcode">
+			<h3>QRcode</h3>
+			<img id="QRcode1" alt="QRcode" />
+			<span>嵌套图片 =></span>
+			<img id="QRcode2" alt="QRcode" />
+		</div>
+
 		<script>
 			let img = document.getElementById('img')
 			let img2 = document.getElementById('img2')
 			let img4 = document.getElementById('img4')
 			let blur2 = document.getElementById('blur2')
 			let blur3 = document.getElementById('blur3')
-			// console.log('111', waterMarker)
-			const { marker, mosaic, blur } = waterMarker
+			let QRcode1 = document.getElementById('QRcode1')
+			let QRcode2 = document.getElementById('QRcode2')
+
+			const { marker, mosaic, blur, QRcode } = waterMarker
+
 			// console.log(mosaic)
 			let config = {
 				src: 'http://jimmyxx.oss-cn-beijing.aliyuncs.com/lot.png',
@@ -88,6 +98,21 @@
 				radius: 10,
 			}).then(source => {
 				blur3.src = source
+			})
+
+			QRcode({
+				source: 'http://www.jimmyxuexue.top',
+				size: 100,
+			}).then(source => {
+				QRcode1.src = source
+			})
+
+			QRcode({
+				source: 'http://www.jimmyxuexue.top',
+				src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
+				size: 100,
+			}).then(source => {
+				QRcode2.src = source
 			})
 		</script>
 	</body>

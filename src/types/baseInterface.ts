@@ -51,3 +51,14 @@ export interface BlurConfig {
 	output?: string
 	radius?: number // 模糊半径
 }
+
+export interface TQrCodeConfig {
+	src: string // 中心图片链接
+	source: string // 二维码资源
+	codeSize: number // 二维码宽
+	size: number // 中心图片宽
+	colorDark: string // 背景色
+	colorLight: string // 前景色
+	correctLevel: number // 错误级别
+	output: string // 输出资源
+}

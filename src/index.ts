@@ -1,7 +1,5 @@
-import { imgWaterMarker as marker } from './waterMarker'
-import { mosaic } from './mosaic'
-import { blur } from './blur'
+import { imgWaterMarker as marker, mosaic, blur, QRcode } from '@core/index'
 
-export { marker, mosaic, blur }
+export { marker, mosaic, blur, QRcode }
 
-export default { marker, mosaic, blur }
+export default { marker, mosaic, blur, QRcode }

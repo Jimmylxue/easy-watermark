@@ -95,6 +95,15 @@
 
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
-    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "types/*":["./src/types/*"],
+      "@utils/*":["./src/utils/*"],
+      "@core/*":["./src/core/*"],
+      "@instance/*":["./src/instance/*"],
+      "@exception/*":["./src/exception/*"],
+      "@api/*":["./src/api/*"],
+    },                                  /* Skip type checking all .d.ts files. */
   }
 }

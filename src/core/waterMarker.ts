@@ -1,8 +1,7 @@
-import { ConfigParams, Position } from './type/baseInterface'
-import { createImgInstance } from './core/imgInstance'
-import { createCanvas } from './core/canvasInstance'
-import { getTextBound, getPositionType } from './utils'
-import BaseError, { warn, error } from './core/error'
+import { ConfigParams, Position } from 'types/baseInterface'
+import { createImgInstance, createCanvas } from '@instance/index'
+import { getTextBound, getPositionType } from '@utils/utils'
+import BaseError, { warn, error } from '@exception/error'
 
 export function imgWaterMarker(config: ConfigParams): Promise<string> {
 	return new Promise(async (resolve, reject) => {

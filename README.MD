@@ -28,6 +28,10 @@ GitHub: [传送门](https://github.com/Jimmylxue/easy-watermark)
 
 ![image-20220917173326254](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220917173326254.png)
 
+**QRcode**
+
+![image-20220917220428792](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220917220428792.png)
+
 ## 快速开始
 
 #### 安装下载
@@ -46,18 +50,20 @@ yarn add esay-watermark (推荐)
 
   ```vue
   <template>
-  	<img alt="Vue logo" :src="imgurl" />
-    <img alt="Vue logo" :src="imgur2" />
-    <img alt="Vue logo" :src="imgur3" />
+  	<img alt="marker" :src="imgurl" />
+    <img alt="mosaic" :src="imgur2" />
+    <img alt="blur" :src="imgur3" />
+    <img alt="QRcode" :src="imgur4" />
   </template>
   
   <script setup>
   import { ref } from 'vue'
-  import { marker, mosaic, blur } from 'esay-watermark'
+  import { marker, mosaic, blur, QRcode } from 'esay-watermark'
   
   const imgUrl = ref('')
   const imgUrl2 = ref('')
   const imgUrl3 = ref('')
+  const imgUrl4 = ref('')
   
   // 水印效果
   marker({
@@ -74,7 +80,7 @@ yarn add esay-watermark (推荐)
   	src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
   	size: 5,
   }).then(source => {
-  	imgur2.src = source
+  	imgUrl3.src = source
   })
     
   // 高斯模糊效果
@@ -82,7 +88,15 @@ yarn add esay-watermark (推荐)
   	src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
   	radius: 5,
   }).then(source => {
-  	imgur2.src = source
+  	imgUrl4.src = source
+  })
+  
+  // QRcode
+  QRcode({
+    source: 'http://www.jimmyxuexue.top',
+    size: 100,
+  }).then(source => {
+    QRcode1.src = source
   })
   </script>
   ```
@@ -130,6 +144,15 @@ yarn add esay-watermark (推荐)
         radius: 5,
       }).then(source => {
         imgur2.src = source
+      })
+      
+      // QRcode
+      QRcode({
+        source: 'http://www.jimmyxuexue.top',
+        src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
+        size: 100,
+      }).then(source => {
+        QRcode2.src = source
       })
   	</script>
   </body>
@@ -181,6 +204,19 @@ yarn add esay-watermark (推荐)
 | blur | number \| string | no | 模糊半径，越大越模糊（默认5） |
 | output | 'jpeg' \| 'png' | no | 导出图片类型（默认jpeg）                |
 
+**QRcode API**
+
+| 属性名       | 类型           | 是否必填 | 描述                     |
+| ------------ | -------------- | -------- | ------------------------ |
+| source       | string         | yes      | 二维码资源（扫码结果）   |
+| src          | string         | no       | 二维码中心区图片         |
+| codeSize     | number         | no       | 导出图片类型（默认jpeg） |
+| size         | number         | no       | 中心区图片尺寸           |
+| colorDark    | string         | no       | 二维码亮色（前景色）     |
+| colorLight   | string         | no       | 二维码暗色（背景色）     |
+| correctLevel | number         | no       | 错误级别                 |
+| output       | 'jpeg' \|'png' | no       | 导出图片类型（默认jpeg） |
+
 ## 更新日志
 
 - [x] 新增 rotate 旋转角度
@@ -195,7 +231,7 @@ yarn add esay-watermark (推荐)
 
   > 2022.07.02 更新
   
-- [x] 新增 `blur` 高斯模糊
+- [x] 新增 `blur` 高斯模糊、`QRcode`二维码
 
   > 2022.09.17 更新
 

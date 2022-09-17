@@ -1,4 +1,4 @@
-import { textBound, Position } from './type/baseInterface'
+import { textBound, Position } from '../types/baseInterface'
 
 // 获取文字的宽高
 export const getTextBound = (

@@ -1,4 +1,4 @@
-import { ImgInstanceProps } from '../type/imgInstanceType'
+import { ImgInstanceProps } from '../types/imgInstanceType'
 
 export function createImgInstance({
 	source,
@@ -11,6 +11,9 @@ export function createImgInstance({
 		img.onload = () => {
 			resolve(img)
 		}
-		img.onerror = onError
+		img.onerror = () => {
+			onError()
+			reject('资源加载失败')
+		}
 	})
 }
