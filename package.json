@@ -1,6 +1,6 @@
 {
   "name": "esay-watermark",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "types": "dist/index.d.ts",
@@ -10,7 +10,7 @@
     "dev": "webpack-dev-server"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jimmyxuexue <1002661758@qq.com> (https://github.com/Jimmylxue)",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.15.8",

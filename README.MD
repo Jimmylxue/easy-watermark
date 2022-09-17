@@ -24,6 +24,10 @@ GitHub: [传送门](https://github.com/Jimmylxue/easy-watermark)
 
 ![image-20220701233625989](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220701233625989.png)
 
+**blur 高斯模糊**
+
+![image-20220917173326254](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220917173326254.png)
+
 ## 快速开始
 
 #### 安装下载
@@ -31,7 +35,7 @@ GitHub: [传送门](https://github.com/Jimmylxue/easy-watermark)
 ```
 npm i esay-watermark
 
-cnpm i esay-watermark (推荐)
+yarn add esay-watermark (推荐)
 ```
 
 #### 基本使用
@@ -43,14 +47,17 @@ cnpm i esay-watermark (推荐)
   ```vue
   <template>
   	<img alt="Vue logo" :src="imgurl" />
+    <img alt="Vue logo" :src="imgur2" />
+    <img alt="Vue logo" :src="imgur3" />
   </template>
   
   <script setup>
   import { ref } from 'vue'
-  import { marker, mosaic } from 'esay-watermark'
+  import { marker, mosaic, blur } from 'esay-watermark'
   
   const imgUrl = ref('')
   const imgUrl2 = ref('')
+  const imgUrl3 = ref('')
   
   // 水印效果
   marker({
@@ -67,7 +74,15 @@ cnpm i esay-watermark (推荐)
   	src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
   	size: 5,
   }).then(source => {
-  	img.src = source
+  	imgur2.src = source
+  })
+    
+  // 高斯模糊效果
+  blur({
+  	src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
+  	radius: 5,
+  }).then(source => {
+  	imgur2.src = source
   })
   </script>
   ```
@@ -77,41 +92,52 @@ cnpm i esay-watermark (推荐)
   ```html
   <body>
   	<script src="./watermark.min.js"></script>
-  	<img id="img2" alt="水印效果" />
-		<img id="img" alt="马赛克效果" />
-  	<script>
-			const { marker, mosaic } = waterMarker
-			const img = document.getElementById('img')
-  		const img2 = document.getElementById('img2')
+  	<img id="img" alt="水印效果" />
+		<img id="img2" alt="马赛克效果" />
+    <img id="img3" alt="高斯模糊效果" />
+		<script>
+			const { marker, mosaic, blur } = waterMarker // watermark 默认导出对象
+  		const img = document.getElementById('img')
+			const img2 = document.getElementById('img2')
+      const img3 = document.getElementById('img3')
+      
 			// 制作水印
-  		const config = {
-  			src: 'http://jimmyxx.oss-cn-beijing.aliyuncs.com/lot.png',
+			const config = {
+				src: 'http://jimmyxx.oss-cn-beijing.aliyuncs.com/lot.png',
 				text: 'easy-watermark',
 				color: '#bdc3c7',
 				size: 40,
 				position: 'center',
-				padding: 10,
-				rotate: -15,
-				type: 'stroke',
+  			padding: 10,
+  			rotate: -15,
+  			type: 'stroke',
   		}
   		marker(config).then(res => {
-  			img2.src = res
-  		})
-
+				img2.src = res
+			})
+	
 			// 制作马赛克效果
 			mosaic({
 				src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
 				size: 5,
-			}).then(source => {
-				img.src = source
-			})
+  		}).then(source => {
+  			img.src = source
+  		})
+      
+      // 高斯模糊效果
+      blur({
+        src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
+        radius: 5,
+      }).then(source => {
+        imgur2.src = source
+      })
   	</script>
   </body>
   ```
 
 ## API
 
-**marker 水印API**
+**marker API**
 
 | 属性名   | 类型   | 是否必填   | 描述                          |
 | -------- | ------ | ------ | --------------------------------------------- |
@@ -139,12 +165,20 @@ cnpm i esay-watermark (推荐)
 | right-center    | 右中 |
 | right-bottom    | 右下 |
 
-**mosaic 马赛克API**
+**mosaic API**
 
 | 属性名   | 类型   | 是否必填   | 描述                          |
 | -------- | ------ | ------ | --------------------------------------------- |
 | src      | string | yes | 图片地址（必填）                              |
 | size | number \| string | no | 模糊力度，越大越模糊（默认10） |
+| output | 'jpeg' \| 'png' | no | 导出图片类型（默认jpeg）                |
+
+**blur API**
+
+| 属性名   | 类型   | 是否必填   | 描述                          |
+| -------- | ------ | ------ | --------------------------------------------- |
+| src      | string | yes | 图片地址（必填）                              |
+| blur | number \| string | no | 模糊半径，越大越模糊（默认5） |
 | output | 'jpeg' \| 'png' | no | 导出图片类型（默认jpeg）                |
 
 ## 更新日志
@@ -160,6 +194,10 @@ cnpm i esay-watermark (推荐)
 - [x] 新增 `mosaic ` 图片转马赛克
 
   > 2022.07.02 更新
+  
+- [x] 新增 `blur` 高斯模糊
+
+  > 2022.09.17 更新
 
 ## 敬请期待
 
