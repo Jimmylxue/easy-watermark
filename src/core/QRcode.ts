@@ -1,6 +1,6 @@
-import { TQrCodeConfig } from 'types/baseInterface'
-import { createImgInstance, createCanvas } from '@instance/index'
-import { error } from '@exception/index'
+import { TQrCodeConfig } from '../types/baseInterface'
+import { createImgInstance, createCanvas } from '../instance/index'
+import { error } from '../exception/index'
 // @ts-ignore
 import { api } from '../api/qrcode.js'
 export function QRcode({

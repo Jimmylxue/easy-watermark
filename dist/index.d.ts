@@ -1,4 +1,4 @@
-import { imgWaterMarker as marker, mosaic, blur, QRcode } from '@core/index';
+import { imgWaterMarker as marker, mosaic, blur, QRcode } from './core/index';
 export { marker, mosaic, blur, QRcode };
 declare const _default: {
     marker: typeof marker;

@@ -1,6 +1,6 @@
-import { MosaicConfig } from 'types/baseInterface'
-import { createImgInstance, createCanvas } from '@instance/index'
-import { error } from '@exception/index'
+import { MosaicConfig } from '../types/baseInterface'
+import { createImgInstance, createCanvas } from '../instance/index'
+import { error } from '../exception/index'
 
 export function mosaic({
 	src,
