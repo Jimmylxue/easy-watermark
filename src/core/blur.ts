@@ -19,6 +19,6 @@ export function blur({ src, output = 'jpeg', radius = 5 }: BlurConfig) {
 		// const data = imgData.data
 		const data = gaussBlur(imgData, radius)
 		ctx.putImageData(data, 0, 0)
-		resolve(canvas.toDataURL(`image/${output}||jpeg`))
+		resolve(canvas.toDataURL(`image/${output}`))
 	})
 }

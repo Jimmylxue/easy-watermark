@@ -31,6 +31,6 @@ export function mosaic({
 				ctx.fill()
 			}
 		}
-		resolve(canvas.toDataURL(`image/${output}||jpeg`))
+		resolve(canvas.toDataURL(`image/${output}`))
 	})
 }

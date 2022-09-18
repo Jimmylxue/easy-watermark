@@ -5,7 +5,7 @@ import { error } from '../exception/index'
 import { api } from '../api/qrcode.js'
 export function QRcode({
 	src,
-	output,
+	output = 'jpeg',
 	source,
 	codeSize = 400,
 	size = 100,
@@ -44,6 +44,6 @@ export function QRcode({
 			)
 		}
 
-		resolve(canvas.toDataURL(`image/${output}||jpeg`))
+		resolve(canvas.toDataURL(`image/${output}`))
 	})
 }

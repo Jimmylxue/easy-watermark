@@ -35,9 +35,9 @@
 				alt="blur"
 				src="https://avatars.githubusercontent.com/u/65758455?v=4"
 			/>
-			<span>size:5 =></span>
+			<span>radius:5 =></span>
 			<img id="blur2" alt="" />
-			<span>size:10 =></span>
+			<span>radius:10 =></span>
 			<img id="blur3" alt="" />
 		</div>
 
@@ -60,16 +60,16 @@
 
 			const { marker, mosaic, blur, QRcode, fullMarker } = waterMarker
 
-			// console.log(mosaic)
 			let config = {
 				src: 'http://jimmyxx.oss-cn-beijing.aliyuncs.com/lot.png',
 				text: 'easy-watermark https://github.com/Jimmylxue',
 				color: '#1abc9c',
 				size: 40,
-				position: 'center',
+				position: 'CENTER',
 				padding: 10,
 				rotate: -15,
 				type: 'fill',
+				output: 'png',
 			}
 			marker(config).then(res => {
 				img2.src = res
@@ -78,6 +78,7 @@
 			mosaic({
 				src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
 				size: 5,
+				output: 'png',
 			}).then(source => {
 				img.src = source
 			})
@@ -85,6 +86,7 @@
 			mosaic({
 				src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
 				size: 15,
+				output: 'png',
 			}).then(source => {
 				img4.src = source
 			})
@@ -99,6 +101,7 @@
 			blur({
 				src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
 				radius: 10,
+				output: 'png',
 			}).then(source => {
 				blur3.src = source
 			})
@@ -106,6 +109,7 @@
 			QRcode({
 				source: 'http://www.jimmyxuexue.top',
 				size: 100,
+				output: 'png',
 			}).then(source => {
 				QRcode1.src = source
 			})
@@ -114,6 +118,7 @@
 				source: 'http://www.jimmyxuexue.top',
 				src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
 				size: 100,
+				output: 'png',
 			}).then(source => {
 				QRcode2.src = source
 			})
@@ -126,6 +131,7 @@
 				padding: 180,
 				rotate: -15,
 				type: 'stroke',
+				output: 'png',
 			}).then(source => {
 				fullMarker1.src = source
 			})

@@ -1,4 +1,4 @@
-import { textBound, Position } from '../types/baseInterface'
+import { textBound, Position, TPositionConst } from '../types/baseInterface'
 
 // 获取文字的宽高
 export const getTextBound = (
@@ -13,34 +13,34 @@ export const getTextBound = (
 }
 
 // 获取方位
-export const getPositionType = (position: string): number => {
+export const getPositionType = (position: TPositionConst): number => {
 	let flag: any
 	switch (position) {
-		case 'left-top':
+		case 'LEFT_TOP':
 			flag = Position.LEFT_TOP
 			break
-		case 'left-center':
+		case 'LEFT_CENTER':
 			flag = Position.LEFT_CENTER
 			break
-		case 'left-bottom':
+		case 'LEFT_BOTTOM':
 			flag = Position.LEFT_BOTTOM
 			break
-		case 'center-top':
+		case 'CENTER_TOP':
 			flag = Position.CENTER_TOP
 			break
-		case 'center':
+		case 'CENTER':
 			flag = Position.CENTER
 			break
-		case 'center-bottom':
+		case 'CENTER_BOTTOM':
 			flag = Position.CENTER_BOTTOM
 			break
-		case 'right-top':
+		case 'RIGHT_TOP':
 			flag = Position.RIGHT_TOP
 			break
-		case 'right-center':
+		case 'RIGHT_CENTER':
 			flag = Position.RIGHT_CENTER
 			break
-		case 'right-bottom':
+		case 'RIGHT_BOTTOM':
 			flag = Position.RIGHT_BOTTOM
 			break
 	}

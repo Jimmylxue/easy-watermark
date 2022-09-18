@@ -1,4 +1,4 @@
-import { ConfigParams, Position } from '../types/baseInterface'
+import { ConfigParams, Position, TPositionConst } from '../types/baseInterface'
 import { createImgInstance, createCanvas } from '../instance/index'
 import { getTextBound, getPositionType } from '../utils/utils'
 import BaseError, { warn, error } from '../exception/error'
@@ -9,12 +9,12 @@ export function imgWaterMarker(config: ConfigParams): Promise<string> {
 		const {
 			src,
 			text,
-			size,
-			color,
-			padding,
-			output,
-			position,
-			rotate,
+			size = 20,
+			color = '#c0c0c0',
+			padding = 30,
+			output = 'jpeg',
+			position = 'RIGHT_BOTTOM',
+			rotate = 0,
 			type = 'fill',
 		} = config
 		const img = await createImgInstance({
@@ -26,21 +26,12 @@ export function imgWaterMarker(config: ConfigParams): Promise<string> {
 		canvas.width = width
 		canvas.height = height
 		ctx.drawImage(img, 0, 0, width, height)
-		ctx.font = `${size || 20}px bold italic arial`
+		ctx.font = `${size}px bold italic arial`
 		let lineGradient = ctx.createLinearGradient(100, 200, 200, 200)
-		lineGradient.addColorStop(1, color || '#ccc')
+		lineGradient.addColorStop(1, color)
 		ctx.fillStyle = lineGradient
-		drawText(
-			ctx,
-			text,
-			position || 'right-bottom',
-			padding,
-			width,
-			height,
-			type,
-			rotate
-		)
-		resolve(canvas.toDataURL(`image/${output}||jpeg`))
+		drawText(ctx, text, position, padding, width, height, type, rotate)
+		resolve(canvas.toDataURL(`image/${output}`))
 	})
 }
 
@@ -64,7 +55,7 @@ function checkConfig(config: ConfigParams, reject: (reason?: any) => void) {
 function drawText(
 	ctx: CanvasRenderingContext2D,
 	text: string,
-	position: string,
+	position: TPositionConst,
 	padding: number = 30,
 	width: number,
 	height: number,

@@ -103,29 +103,29 @@ var error_1 = __importStar(__webpack_require__(7));
 function imgWaterMarker(config) {
     var _this = this;
     return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-        var src, text, size, color, padding, output, position, rotate, _a, type, img, _b, canvas, ctx, width, height, lineGradient;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
+        var src, text, _a, size, _b, color, _c, padding, _d, output, _e, position, _f, rotate, _g, type, img, _h, canvas, ctx, width, height, lineGradient;
+        return __generator(this, function (_j) {
+            switch (_j.label) {
                 case 0:
                     checkConfig(config, reject);
-                    src = config.src, text = config.text, size = config.size, color = config.color, padding = config.padding, output = config.output, position = config.position, rotate = config.rotate, _a = config.type, type = _a === void 0 ? 'fill' : _a;
+                    src = config.src, text = config.text, _a = config.size, size = _a === void 0 ? 20 : _a, _b = config.color, color = _b === void 0 ? '#c0c0c0' : _b, _c = config.padding, padding = _c === void 0 ? 30 : _c, _d = config.output, output = _d === void 0 ? 'jpeg' : _d, _e = config.position, position = _e === void 0 ? 'RIGHT_BOTTOM' : _e, _f = config.rotate, rotate = _f === void 0 ? 0 : _f, _g = config.type, type = _g === void 0 ? 'fill' : _g;
                     return [4 /*yield*/, (0, index_1.createImgInstance)({
                             source: src,
                             onError: function () { return (0, error_1.error)('注意-一个无法打开的图片资源'); },
                         })];
                 case 1:
-                    img = _c.sent();
-                    _b = (0, index_1.createCanvas)(), canvas = _b.canvas, ctx = _b.ctx;
+                    img = _j.sent();
+                    _h = (0, index_1.createCanvas)(), canvas = _h.canvas, ctx = _h.ctx;
                     width = img.width, height = img.height;
                     canvas.width = width;
                     canvas.height = height;
                     ctx.drawImage(img, 0, 0, width, height);
-                    ctx.font = "".concat(size || 20, "px bold italic arial");
+                    ctx.font = "".concat(size, "px bold italic arial");
                     lineGradient = ctx.createLinearGradient(100, 200, 200, 200);
-                    lineGradient.addColorStop(1, color || '#ccc');
+                    lineGradient.addColorStop(1, color);
                     ctx.fillStyle = lineGradient;
-                    drawText(ctx, text, position || 'right-bottom', padding, width, height, type, rotate);
-                    resolve(canvas.toDataURL("image/".concat(output, "||jpeg")));
+                    drawText(ctx, text, position, padding, width, height, type, rotate);
+                    resolve(canvas.toDataURL("image/".concat(output)));
                     return [2 /*return*/];
             }
         });
@@ -296,31 +296,31 @@ exports.getTextBound = getTextBound;
 var getPositionType = function (position) {
     var flag;
     switch (position) {
-        case 'left-top':
+        case 'LEFT_TOP':
             flag = 1 /* Position.LEFT_TOP */;
             break;
-        case 'left-center':
+        case 'LEFT_CENTER':
             flag = 2 /* Position.LEFT_CENTER */;
             break;
-        case 'left-bottom':
+        case 'LEFT_BOTTOM':
             flag = 3 /* Position.LEFT_BOTTOM */;
             break;
-        case 'center-top':
+        case 'CENTER_TOP':
             flag = 4 /* Position.CENTER_TOP */;
             break;
-        case 'center':
+        case 'CENTER':
             flag = 5 /* Position.CENTER */;
             break;
-        case 'center-bottom':
+        case 'CENTER_BOTTOM':
             flag = 6 /* Position.CENTER_BOTTOM */;
             break;
-        case 'right-top':
+        case 'RIGHT_TOP':
             flag = 7 /* Position.RIGHT_TOP */;
             break;
-        case 'right-center':
+        case 'RIGHT_CENTER':
             flag = 8 /* Position.RIGHT_CENTER */;
             break;
-        case 'right-bottom':
+        case 'RIGHT_BOTTOM':
             flag = 9 /* Position.RIGHT_BOTTOM */;
             break;
     }
@@ -533,7 +533,7 @@ function mosaic(_a) {
                             ctx.fill();
                         }
                     }
-                    resolve(canvas.toDataURL("image/".concat(output, "||jpeg")));
+                    resolve(canvas.toDataURL("image/".concat(output)));
                     return [2 /*return*/];
             }
         });
@@ -623,7 +623,7 @@ function blur(_a) {
                     imgData = ctx.getImageData(0, 0, width, height);
                     data = (0, utils_1.gaussBlur)(imgData, radius);
                     ctx.putImageData(data, 0, 0);
-                    resolve(canvas.toDataURL("image/".concat(output, "||jpeg")));
+                    resolve(canvas.toDataURL("image/".concat(output)));
                     return [2 /*return*/];
             }
         });
@@ -682,7 +682,7 @@ var index_2 = __webpack_require__(9);
 var qrcode_js_1 = __webpack_require__(12);
 function QRcode(_a) {
     var _this = this;
-    var src = _a.src, output = _a.output, source = _a.source, _b = _a.codeSize, codeSize = _b === void 0 ? 400 : _b, _c = _a.size, size = _c === void 0 ? 100 : _c, _d = _a.colorDark, colorDark = _d === void 0 ? '#000' : _d, _e = _a.colorLight, colorLight = _e === void 0 ? '#fff' : _e, _f = _a.correctLevel, correctLevel = _f === void 0 ? 2 : _f;
+    var src = _a.src, _b = _a.output, output = _b === void 0 ? 'jpeg' : _b, source = _a.source, _c = _a.codeSize, codeSize = _c === void 0 ? 400 : _c, _d = _a.size, size = _d === void 0 ? 100 : _d, _e = _a.colorDark, colorDark = _e === void 0 ? '#000' : _e, _f = _a.colorLight, colorLight = _f === void 0 ? '#fff' : _f, _g = _a.correctLevel, correctLevel = _g === void 0 ? 2 : _g;
     return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
         var _a, canvas, ctx, img;
         return __generator(this, function (_b) {
@@ -704,7 +704,7 @@ function QRcode(_a) {
                     ctx.drawImage(img, codeSize / 2 - size / 2, codeSize / 2 - size / 2, size, size);
                     _b.label = 2;
                 case 2:
-                    resolve(canvas.toDataURL("image/".concat(output, "||jpeg")));
+                    resolve(canvas.toDataURL("image/".concat(output)));
                     return [2 /*return*/];
             }
         });
@@ -792,29 +792,29 @@ var error_1 = __importStar(__webpack_require__(7));
 function fullMarker(config) {
     var _this = this;
     return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-        var src, text, size, color, padding, output, rotate, _a, type, img, _b, canvas, ctx, width, height, lineGradient;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
+        var src, text, _a, size, _b, color, _c, padding, _d, output, _e, rotate, _f, type, img, _g, canvas, ctx, width, height, lineGradient;
+        return __generator(this, function (_h) {
+            switch (_h.label) {
                 case 0:
                     checkConfig(config, reject);
-                    src = config.src, text = config.text, size = config.size, color = config.color, padding = config.padding, output = config.output, rotate = config.rotate, _a = config.type, type = _a === void 0 ? 'fill' : _a;
+                    src = config.src, text = config.text, _a = config.size, size = _a === void 0 ? 20 : _a, _b = config.color, color = _b === void 0 ? '#c0c0c0' : _b, _c = config.padding, padding = _c === void 0 ? 20 : _c, _d = config.output, output = _d === void 0 ? 'jpeg' : _d, _e = config.rotate, rotate = _e === void 0 ? 0 : _e, _f = config.type, type = _f === void 0 ? 'fill' : _f;
                     return [4 /*yield*/, (0, index_1.createImgInstance)({
                             source: src,
                             onError: function () { return (0, error_1.error)('注意-一个无法打开的图片资源'); },
                         })];
                 case 1:
-                    img = _c.sent();
-                    _b = (0, index_1.createCanvas)(), canvas = _b.canvas, ctx = _b.ctx;
+                    img = _h.sent();
+                    _g = (0, index_1.createCanvas)(), canvas = _g.canvas, ctx = _g.ctx;
                     width = img.width, height = img.height;
                     canvas.width = width;
                     canvas.height = height;
                     ctx.drawImage(img, 0, 0, width, height);
-                    ctx.font = "".concat(size || 20, "px bold italic arial");
+                    ctx.font = "".concat(size, "px bold italic arial");
                     lineGradient = ctx.createLinearGradient(100, 200, 200, 200);
-                    lineGradient.addColorStop(1, color || '#ccc');
+                    lineGradient.addColorStop(1, color);
                     ctx.fillStyle = lineGradient;
                     drawText(ctx, text, padding, width, height, type, rotate);
-                    resolve(canvas.toDataURL("image/".concat(output, "||jpeg")));
+                    resolve(canvas.toDataURL("image/".concat(output)));
                     return [2 /*return*/];
             }
         });

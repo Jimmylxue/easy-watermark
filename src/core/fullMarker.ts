@@ -9,11 +9,11 @@ export function fullMarker(config: TFullMarkerParams): Promise<string> {
 		const {
 			src,
 			text,
-			size,
-			color,
-			padding,
-			output,
-			rotate,
+			size = 20,
+			color = '#c0c0c0',
+			padding = 20,
+			output = 'jpeg',
+			rotate = 0,
 			type = 'fill',
 		} = config
 		const img = await createImgInstance({
@@ -25,12 +25,12 @@ export function fullMarker(config: TFullMarkerParams): Promise<string> {
 		canvas.width = width
 		canvas.height = height
 		ctx.drawImage(img, 0, 0, width, height)
-		ctx.font = `${size || 20}px bold italic arial`
+		ctx.font = `${size}px bold italic arial`
 		let lineGradient = ctx.createLinearGradient(100, 200, 200, 200)
-		lineGradient.addColorStop(1, color || '#ccc')
+		lineGradient.addColorStop(1, color)
 		ctx.fillStyle = lineGradient
 		drawText(ctx, text, padding, width, height, type, rotate)
-		resolve(canvas.toDataURL(`image/${output}||jpeg`))
+		resolve(canvas.toDataURL(`image/${output}`))
 	})
 }
 
