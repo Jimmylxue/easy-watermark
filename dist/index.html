@@ -11,6 +11,8 @@
 		<script src="watermark.min.js"></script>
 		<img id="img2" alt="" />
 		<br />
+		<img id="fullMarker" alt="" />
+		<br />
 		<div class="mosaic">
 			<h3>mosaic demo</h3>
 			<img
@@ -54,19 +56,20 @@
 			let blur3 = document.getElementById('blur3')
 			let QRcode1 = document.getElementById('QRcode1')
 			let QRcode2 = document.getElementById('QRcode2')
+			let fullMarker1 = document.getElementById('fullMarker')
 
-			const { marker, mosaic, blur, QRcode } = waterMarker
+			const { marker, mosaic, blur, QRcode, fullMarker } = waterMarker
 
 			// console.log(mosaic)
 			let config = {
 				src: 'http://jimmyxx.oss-cn-beijing.aliyuncs.com/lot.png',
-				text: 'easy-watermark',
-				color: '#bdc3c7',
+				text: 'easy-watermark https://github.com/Jimmylxue',
+				color: '#1abc9c',
 				size: 40,
 				position: 'center',
 				padding: 10,
 				rotate: -15,
-				type: 'stroke',
+				type: 'fill',
 			}
 			marker(config).then(res => {
 				img2.src = res
@@ -113,6 +116,18 @@
 				size: 100,
 			}).then(source => {
 				QRcode2.src = source
+			})
+
+			fullMarker({
+				src: 'http://jimmyxx.oss-cn-beijing.aliyuncs.com/lot.png',
+				text: 'easy-watermark',
+				color: '#c0c0c0',
+				size: 30,
+				padding: 180,
+				rotate: -15,
+				type: 'stroke',
+			}).then(source => {
+				fullMarker1.src = source
 			})
 		</script>
 	<script src="watermark.js"></script><script src="watermark.min.js"></script></body>

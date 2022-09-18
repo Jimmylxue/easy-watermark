@@ -1,7 +1,7 @@
 /**
  * 公共接口类型
  */
-export interface ConfigParams {
+export declare type ConfigParams = {
     src: string;
     text: string;
     size: number;
@@ -11,7 +11,8 @@ export interface ConfigParams {
     position: 'left-top' | 'left-center' | 'left-bottom' | 'center-top' | 'center' | 'center-bottom' | 'right-top' | 'right-center' | 'right-bottom';
     rotate?: number;
     type: 'fill' | 'stroke';
-}
+};
+export declare type TFullMarkerParams = Omit<ConfigParams, 'position'>;
 export interface textBound {
     width: number;
     height: number;

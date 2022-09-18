@@ -2,7 +2,7 @@
  * 公共接口类型
  */
 
-export interface ConfigParams {
+export type ConfigParams = {
 	src: string // 图片地址
 	text: string // 水印文字
 	size: number // 水印文字字号
@@ -22,6 +22,8 @@ export interface ConfigParams {
 	rotate?: number // 角度
 	type: 'fill' | 'stroke'
 }
+
+export type TFullMarkerParams = Omit<ConfigParams, 'position'>
 
 export interface textBound {
 	width: number

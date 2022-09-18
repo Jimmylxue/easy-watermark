@@ -20,6 +20,10 @@ GitHub: [传送门](https://github.com/Jimmylxue/easy-watermark)
 
 ![demo](http://jimmyxx.oss-cn-beijing.aliyuncs.com/demo2.png)
 
+**fullMarker 全局平铺水印**
+
+![image-20220918195259533](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220918195259533.png)
+
 **mosaic 马赛克效果**
 
 ![image-20220701233625989](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220701233625989.png)
@@ -51,19 +55,21 @@ yarn add esay-watermark (推荐)
   ```vue
   <template>
   	<img alt="marker" :src="imgurl" />
-    <img alt="mosaic" :src="imgur2" />
-    <img alt="blur" :src="imgur3" />
-    <img alt="QRcode" :src="imgur4" />
+    <img alt="mosaic" :src="imgurl2" />
+    <img alt="blur" :src="imgurl3" />
+    <img alt="QRcode" :src="imgurl4" />
+    <img alt="fullMarker" :src="imgurl4" />
   </template>
   
   <script setup>
   import { ref } from 'vue'
-  import { marker, mosaic, blur, QRcode } from 'esay-watermark'
+  import { marker, mosaic, blur, QRcode, fullMarker } from 'esay-watermark'
   
   const imgUrl = ref('')
   const imgUrl2 = ref('')
   const imgUrl3 = ref('')
   const imgUrl4 = ref('')
+  const imgUrl5 = ref('')
   
   // 水印效果
   marker({
@@ -80,7 +86,7 @@ yarn add esay-watermark (推荐)
   	src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
   	size: 5,
   }).then(source => {
-  	imgUrl3.src = source
+  	imgUrl2.src = source
   })
     
   // 高斯模糊效果
@@ -88,7 +94,7 @@ yarn add esay-watermark (推荐)
   	src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
   	radius: 5,
   }).then(source => {
-  	imgUrl4.src = source
+  	imgUrl3.src = source
   })
   
   // QRcode
@@ -96,7 +102,20 @@ yarn add esay-watermark (推荐)
     source: 'http://www.jimmyxuexue.top',
     size: 100,
   }).then(source => {
-    QRcode1.src = source
+    imgUrl4.src = source
+  })
+    
+  // fullMarker 全局平铺水印
+  fullMarker({
+    src: 'http://jimmyxx.oss-cn-beijing.aliyuncs.com/lot.png',
+    text: 'easy-watermark https://github.com/Jimmylxue/easy-watermark',
+    color: '#c0c0c0',
+    size: 30,
+    padding: 180,
+    rotate: -15,
+    type: 'stroke',
+  }).then(source => {
+    imgUrl5.value = source
   })
   </script>
   ```
@@ -109,33 +128,37 @@ yarn add esay-watermark (推荐)
   	<img id="img" alt="水印效果" />
 		<img id="img2" alt="马赛克效果" />
     <img id="img3" alt="高斯模糊效果" />
-		<script>
-			const { marker, mosaic, blur } = waterMarker // watermark 默认导出对象
+	  <img id="img4" alt="QRCode" />
+	  <img id="img5" alt="全局平铺水印" />
+  	<script>
+			const { marker, mosaic, blur, QRcode, fullMarker } = waterMarker // watermark 默认导出对象
   		const img = document.getElementById('img')
-			const img2 = document.getElementById('img2')
-      const img3 = document.getElementById('img3')
-      
+  		const img2 = document.getElementById('img2')
+	    const img3 = document.getElementById('img3')
+	    const img4 = document.getElementById('img4')
+	    const img5 = document.getElementById('img5')
+	    
 			// 制作水印
 			const config = {
 				src: 'http://jimmyxx.oss-cn-beijing.aliyuncs.com/lot.png',
-				text: 'easy-watermark',
-				color: '#bdc3c7',
-				size: 40,
-				position: 'center',
+  			text: 'easy-watermark',
+  			color: '#bdc3c7',
+  			size: 40,
+  			position: 'center',
   			padding: 10,
-  			rotate: -15,
-  			type: 'stroke',
-  		}
-  		marker(config).then(res => {
-				img2.src = res
+				rotate: -15,
+				type: 'stroke',
+			}
+			marker(config).then(res => {
+				img.src = res
 			})
 	
-			// 制作马赛克效果
-			mosaic({
-				src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
-				size: 5,
+  		// 制作马赛克效果
+  		mosaic({
+  			src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
+  			size: 5,
   		}).then(source => {
-  			img.src = source
+  			img2.src = source
   		})
       
       // 高斯模糊效果
@@ -143,7 +166,7 @@ yarn add esay-watermark (推荐)
         src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
         radius: 5,
       }).then(source => {
-        imgur2.src = source
+        img3.src = source
       })
       
       // QRcode
@@ -152,7 +175,20 @@ yarn add esay-watermark (推荐)
         src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
         size: 100,
       }).then(source => {
-        QRcode2.src = source
+        img4.src = source
+      })
+      
+    	// fullMarker 全局平铺水印  
+      fullMarker({
+        src: 'http://jimmyxx.oss-cn-beijing.aliyuncs.com/lot.png',
+        text: 'easy-watermark',
+        color: '#c0c0c0',
+        size: 30,
+        padding: 180,
+        rotate: -15,
+        type: 'stroke',
+      }).then(source => {
+        img5.src = source
       })
   	</script>
   </body>
@@ -167,10 +203,10 @@ yarn add esay-watermark (推荐)
 | src      | string | yes | 图片地址（必填）                              |
 | text     | string | yes | 水印文字                                      |
 | color    | string | yes | 水印颜色                                      |
-| size     | number | yes | 水印文字大小，默认 20                         |
-| padding  | number | yes | 水印距离图片边缘的距离，默认 30               |
-| output   | 'jpeg' \| 'png' | yes | 输出图片类型 支持 `jpeg`和`png` ，默认 `jpeg` |
-| position | Position | yes | 水印所处位置，默认 right-bottom（右下）       |
+| size     | number | no | 水印文字大小，默认 20                         |
+| padding  | number | no | 水印距离图片边缘的距离，默认 30               |
+| output   | 'jpeg' \| 'png' | no | 输出图片类型 支持 `jpeg`和`png` ，默认 `jpeg` |
+| position | Position | no | 水印所处位置，默认 right-bottom（右下）       |
 | type | 'fill'\|'stroke' | no | 文字的“填充模式”和“描边模式”（默认填充模式） |
 | rotate | number | no | 旋转角度       |
 
@@ -217,6 +253,19 @@ yarn add esay-watermark (推荐)
 | correctLevel | number         | no       | 错误级别                 |
 | output       | 'jpeg' \|'png' | no       | 导出图片类型（默认jpeg） |
 
+**fullMarker API**
+
+| 属性名  | 类型             | 是否必填 | 描述                                          |
+| ------- | ---------------- | -------- | --------------------------------------------- |
+| src     | string           | yes      | 图片地址（必填）                              |
+| text    | string           | yes      | 水印文字                                      |
+| color   | string           | yes      | 水印颜色                                      |
+| size    | number           | no       | 水印文字大小，默认 20                         |
+| padding | number           | no       | 平铺水印之间的间距，默认 30                   |
+| output  | 'jpeg' \| 'png'  | no       | 输出图片类型 支持 `jpeg`和`png` ，默认 `jpeg` |
+| type    | 'fill'\|'stroke' | no       | 文字的“填充模式”和“描边模式”（默认填充模式）  |
+| rotate  | number           | no       | 旋转角度                                      |
+
 ## 更新日志
 
 - [x] 新增 rotate 旋转角度
@@ -234,6 +283,10 @@ yarn add esay-watermark (推荐)
 - [x] 新增 `blur` 高斯模糊、`QRcode`二维码
 
   > 2022.09.17 更新
+  
+- [x] 新增 `fullMarker` 平铺水印
+
+  > 2022.09.18 更新
 
 ## 敬请期待
 
