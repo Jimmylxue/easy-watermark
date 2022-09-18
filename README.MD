@@ -22,7 +22,7 @@ GitHub: [传送门](https://github.com/Jimmylxue/easy-watermark)
 
 **fullMarker 全局平铺水印**
 
-![image-20220918195259533](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220918195259533.png)
+![image-20220918202205711](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220918202205711.png)
 
 **mosaic 马赛克效果**
 
