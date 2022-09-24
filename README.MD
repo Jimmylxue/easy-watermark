@@ -1,6 +1,6 @@
 ## watermark.js
 
-watermark 是一个基于 canvas 的简单的生成自定义水印、马赛克、二维码、高斯模糊等的插件，轻量、灵活、配置简单是它的特点。
+watermark 是一个多平台的（支持H5和微信小程序），基于 canvas 的简单的生成自定义水印、马赛克、二维码、高斯模糊等的插件，轻量、灵活、配置简单是它的特点。
 
 GitHub: [传送门](https://github.com/Jimmylxue/easy-watermark)
 
@@ -195,6 +195,16 @@ yarn add esay-watermark (推荐)
   	</script>
   </body>
   ```
+
+## 平台兼容性
+
+|            | H5/WEB | 微信小程序 |
+| ---------- | ------ | ---------- |
+| marker     | ✔      | ✖          |
+| mosaic     | ✔      | ✖          |
+| blur       | ✔      | ✖          |
+| QRcode     | ✔      | ✔          |
+| fullMarker | ✔      | ✖          |
 
 ## API
 
