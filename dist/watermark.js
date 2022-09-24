@@ -98,24 +98,25 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.imgWaterMarker = void 0;
 var index_1 = __webpack_require__(3);
-var utils_1 = __webpack_require__(6);
+var utils_1 = __webpack_require__(5);
 var error_1 = __importStar(__webpack_require__(7));
 function imgWaterMarker(config) {
     var _this = this;
     return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-        var src, text, _a, size, _b, color, _c, padding, _d, output, _e, position, _f, rotate, _g, type, img, _h, canvas, ctx, width, height, lineGradient;
+        var _a, canvas, ctx, src, text, _b, size, _c, color, _d, padding, _e, output, _f, position, _g, rotate, _h, type, img, width, height, lineGradient;
         return __generator(this, function (_j) {
             switch (_j.label) {
                 case 0:
                     checkConfig(config, reject);
-                    src = config.src, text = config.text, _a = config.size, size = _a === void 0 ? 20 : _a, _b = config.color, color = _b === void 0 ? '#c0c0c0' : _b, _c = config.padding, padding = _c === void 0 ? 30 : _c, _d = config.output, output = _d === void 0 ? 'jpeg' : _d, _e = config.position, position = _e === void 0 ? 'RIGHT_BOTTOM' : _e, _f = config.rotate, rotate = _f === void 0 ? 0 : _f, _g = config.type, type = _g === void 0 ? 'fill' : _g;
+                    _a = (0, index_1.createCanvas)(), canvas = _a.canvas, ctx = _a.ctx;
+                    src = config.src, text = config.text, _b = config.size, size = _b === void 0 ? 20 : _b, _c = config.color, color = _c === void 0 ? '#c0c0c0' : _c, _d = config.padding, padding = _d === void 0 ? 30 : _d, _e = config.output, output = _e === void 0 ? 'jpeg' : _e, _f = config.position, position = _f === void 0 ? 'RIGHT_BOTTOM' : _f, _g = config.rotate, rotate = _g === void 0 ? 0 : _g, _h = config.type, type = _h === void 0 ? 'fill' : _h;
                     return [4 /*yield*/, (0, index_1.createImgInstance)({
                             source: src,
+                            canvas: canvas,
                             onError: function () { return (0, error_1.error)('注意-一个无法打开的图片资源'); },
                         })];
                 case 1:
                     img = _j.sent();
-                    _h = (0, index_1.createCanvas)(), canvas = _h.canvas, ctx = _h.ctx;
                     width = img.width, height = img.height;
                     canvas.width = width;
                     canvas.height = height;
@@ -213,6 +214,7 @@ function drawText(ctx, text, position, padding, width, height, type, rotate) {
         ctx.fillText(text || 'watermark', positionWidth, positionHeight);
     }
     else {
+        // 微信小程序下 strokeText 失效
         ctx.strokeText(text || 'watermark', positionWidth, positionHeight);
     }
     // 后面两个数值表示从哪里开始画 如这里是从x = 100 y = 200开始画
@@ -229,21 +231,29 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createImgInstance = exports.createCanvas = void 0;
 var canvasInstance_1 = __webpack_require__(4);
 Object.defineProperty(exports, "createCanvas", ({ enumerable: true, get: function () { return canvasInstance_1.createCanvas; } }));
-var imgInstance_1 = __webpack_require__(5);
+var imgInstance_1 = __webpack_require__(6);
 Object.defineProperty(exports, "createImgInstance", ({ enumerable: true, get: function () { return imgInstance_1.createImgInstance; } }));
 
 
 /***/ }),
 /* 4 */
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createCanvas = void 0;
+var utils_1 = __webpack_require__(5);
 function createCanvas() {
-    var canvas = document.createElement('canvas');
-    var ctx = canvas.getContext('2d');
+    var canvas, ctx;
+    if ((0, utils_1.isMiniProgram)()) {
+        canvas = wx.createOffscreenCanvas({ type: '2d' });
+        ctx = canvas.getContext('2d');
+    }
+    else {
+        canvas = document.createElement('canvas');
+        ctx = canvas.getContext('2d');
+    }
     return { canvas: canvas, ctx: ctx };
 }
 exports.createCanvas = createCanvas;
@@ -256,33 +266,7 @@ exports.createCanvas = createCanvas;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.createImgInstance = void 0;
-function createImgInstance(_a) {
-    var source = _a.source, onError = _a.onError;
-    return new Promise(function (resolve, reject) {
-        var img = new Image();
-        img.setAttribute('crossOrigin', '');
-        img.src = source;
-        img.onload = function () {
-            resolve(img);
-        };
-        img.onerror = function () {
-            onError();
-            reject('资源加载失败');
-        };
-    });
-}
-exports.createImgInstance = createImgInstance;
-
-
-/***/ }),
-/* 6 */
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.gaussBlur = exports.getPositionType = exports.getTextBound = void 0;
+exports.isMiniProgram = exports.gaussBlur = exports.getPositionType = exports.getTextBound = void 0;
 // 获取文字的宽高
 var getTextBound = function (ctx, font) {
     var baseMsg = ctx.measureText(font);
@@ -387,6 +371,50 @@ function gaussBlur(imgData, radius) {
     return imgData;
 }
 exports.gaussBlur = gaussBlur;
+function isMiniProgram() {
+    var ua = navigator.userAgent.toLowerCase();
+    var isWeixin = ua.indexOf('micromessenger') !== -1;
+    if (!!(wx === null || wx === void 0 ? void 0 : wx.openLocation)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+exports.isMiniProgram = isMiniProgram;
+
+
+/***/ }),
+/* 6 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.createImgInstance = void 0;
+var utils_1 = __webpack_require__(5);
+function createImgInstance(_a) {
+    var source = _a.source, onError = _a.onError, canvas = _a.canvas;
+    return new Promise(function (resolve, reject) {
+        var img;
+        if ((0, utils_1.isMiniProgram)()) {
+            img = canvas.createImage();
+        }
+        else {
+            img = new Image();
+        }
+        img.setAttribute('crossOrigin', '');
+        img.src = source;
+        img.onload = function () {
+            resolve(img);
+        };
+        img.onerror = function () {
+            onError();
+            reject('资源加载失败');
+        };
+    });
+}
+exports.createImgInstance = createImgInstance;
 
 
 /***/ }),
@@ -505,16 +533,18 @@ function mosaic(_a) {
     var _this = this;
     var src = _a.src, _b = _a.output, output = _b === void 0 ? 'jpeg' : _b, _c = _a.size, size = _c === void 0 ? 8 : _c;
     return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-        var img, _a, canvas, ctx, width, height, imgData, data, y, x, i, _b, r, g, b;
+        var _a, canvas, ctx, img, width, height, imgData, data, y, x, i, _b, r, g, b;
         return __generator(this, function (_c) {
             switch (_c.label) {
-                case 0: return [4 /*yield*/, (0, index_1.createImgInstance)({
-                        source: src,
-                        onError: function () { return (0, index_2.error)('注意-一个无法打开的图片资源'); },
-                    })];
+                case 0:
+                    _a = (0, index_1.createCanvas)(), canvas = _a.canvas, ctx = _a.ctx;
+                    return [4 /*yield*/, (0, index_1.createImgInstance)({
+                            source: src,
+                            canvas: canvas,
+                            onError: function () { return (0, index_2.error)('注意-一个无法打开的图片资源'); },
+                        })];
                 case 1:
                     img = _c.sent();
-                    _a = (0, index_1.createCanvas)(), canvas = _a.canvas, ctx = _a.ctx;
                     width = img.width, height = img.height;
                     canvas.width = width;
                     canvas.height = height;
@@ -598,24 +628,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.blur = void 0;
-var imgInstance_1 = __webpack_require__(5);
+var imgInstance_1 = __webpack_require__(6);
 var canvasInstance_1 = __webpack_require__(4);
 var error_1 = __webpack_require__(7);
-var utils_1 = __webpack_require__(6);
+var utils_1 = __webpack_require__(5);
 function blur(_a) {
     var _this = this;
     var src = _a.src, _b = _a.output, output = _b === void 0 ? 'jpeg' : _b, _c = _a.radius, radius = _c === void 0 ? 5 : _c;
     return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-        var img, _a, canvas, ctx, width, height, imgData, data;
+        var _a, canvas, ctx, img, width, height, imgData, data;
         return __generator(this, function (_b) {
             switch (_b.label) {
-                case 0: return [4 /*yield*/, (0, imgInstance_1.createImgInstance)({
-                        source: src,
-                        onError: function () { return (0, error_1.error)('注意-一个无法打开的图片资源'); },
-                    })];
+                case 0:
+                    _a = (0, canvasInstance_1.createCanvas)(), canvas = _a.canvas, ctx = _a.ctx;
+                    return [4 /*yield*/, (0, imgInstance_1.createImgInstance)({
+                            source: src,
+                            canvas: canvas,
+                            onError: function () { return (0, error_1.error)('注意-一个无法打开的图片资源'); },
+                        })];
                 case 1:
                     img = _b.sent();
-                    _a = (0, canvasInstance_1.createCanvas)(), canvas = _a.canvas, ctx = _a.ctx;
                     width = img.width, height = img.height;
                     canvas.width = width;
                     canvas.height = height;
@@ -697,6 +729,7 @@ function QRcode(_a) {
                     if (!src) return [3 /*break*/, 2];
                     return [4 /*yield*/, (0, index_1.createImgInstance)({
                             source: src,
+                            canvas: canvas,
                             onError: function () { return (0, index_2.error)('注意-一个无法打开的图片资源'); },
                         })];
                 case 1:
@@ -787,24 +820,25 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.fullMarker = void 0;
 var index_1 = __webpack_require__(3);
-var utils_1 = __webpack_require__(6);
+var utils_1 = __webpack_require__(5);
 var error_1 = __importStar(__webpack_require__(7));
 function fullMarker(config) {
     var _this = this;
     return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-        var src, text, _a, size, _b, color, _c, padding, _d, output, _e, rotate, _f, type, img, _g, canvas, ctx, width, height, lineGradient;
+        var src, text, _a, size, _b, color, _c, padding, _d, output, _e, rotate, _f, type, _g, canvas, ctx, img, width, height, lineGradient;
         return __generator(this, function (_h) {
             switch (_h.label) {
                 case 0:
                     checkConfig(config, reject);
                     src = config.src, text = config.text, _a = config.size, size = _a === void 0 ? 20 : _a, _b = config.color, color = _b === void 0 ? '#c0c0c0' : _b, _c = config.padding, padding = _c === void 0 ? 20 : _c, _d = config.output, output = _d === void 0 ? 'jpeg' : _d, _e = config.rotate, rotate = _e === void 0 ? 0 : _e, _f = config.type, type = _f === void 0 ? 'fill' : _f;
+                    _g = (0, index_1.createCanvas)(), canvas = _g.canvas, ctx = _g.ctx;
                     return [4 /*yield*/, (0, index_1.createImgInstance)({
                             source: src,
+                            canvas: canvas,
                             onError: function () { return (0, error_1.error)('注意-一个无法打开的图片资源'); },
                         })];
                 case 1:
                     img = _h.sent();
-                    _g = (0, index_1.createCanvas)(), canvas = _g.canvas, ctx = _g.ctx;
                     width = img.width, height = img.height;
                     canvas.width = width;
                     canvas.height = height;

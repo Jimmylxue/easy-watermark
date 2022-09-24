@@ -200,11 +200,11 @@ yarn add esay-watermark (推荐)
 
 |            | H5/WEB | 微信小程序 |
 | ---------- | ------ | ---------- |
-| marker     | ✔      | ✖          |
-| mosaic     | ✔      | ✖          |
-| blur       | ✔      | ✖          |
+| marker     | ✔      | ✔          |
+| mosaic     | ✔      | ✔          |
+| blur       | ✔      | ✔          |
 | QRcode     | ✔      | ✔          |
-| fullMarker | ✔      | ✖          |
+| fullMarker | ✔      | ✔          |
 
 ## API
 
@@ -267,16 +267,16 @@ yarn add esay-watermark (推荐)
 
 **fullMarker API**
 
-| 属性名  | 类型             | 是否必填 | 描述                                            |
-| ------- | ---------------- | -------- | ----------------------------------------------- |
-| src     | string           | yes      | 图片地址（必填）                                |
-| text    | string           | yes      | 水印文字                                        |
-| color   | string           | no       | 水印颜色（默认 `#c0c0c0`）                      |
-| size    | number           | no       | 水印文字大小（默认 20）                         |
-| padding | number           | no       | 平铺水印之间的间距（默认 30）                   |
-| output  | 'jpeg' \| 'png'  | no       | 输出图片类型 支持 `jpeg`和`png` （默认 `jpeg`） |
-| type    | 'fill'\|'stroke' | no       | 文字的“填充模式”和“描边模式”（默认`fill`模式）  |
-| rotate  | number           | no       | 旋转角度（默认0）                               |
+| 属性名  | 类型             | 是否必填 | 描述                                                         |
+| ------- | ---------------- | -------- | ------------------------------------------------------------ |
+| src     | string           | yes      | 图片地址（必填）                                             |
+| text    | string           | yes      | 水印文字                                                     |
+| color   | string           | no       | 水印颜色（默认 `#c0c0c0`）                                   |
+| size    | number           | no       | 水印文字大小（默认 20）                                      |
+| padding | number           | no       | 平铺水印之间的间距（默认 30）                                |
+| output  | 'jpeg' \| 'png'  | no       | 输出图片类型 支持 `jpeg`和`png` （默认 `jpeg`）              |
+| type    | 'fill'\|'stroke' | no       | 文字的“填充模式”和“描边模式”（默认`fill`模式）（**微信小程序下只支持**`fill`模式） |
+| rotate  | number           | no       | 旋转角度（默认0）                                            |
 
 ## 更新日志
 
@@ -299,6 +299,10 @@ yarn add esay-watermark (推荐)
 - [x] 新增 `fullMarker` 平铺水印
 
   > 2022.09.18 更新
+  
+- [x] 所有API兼容微信小程序
+
+  > 2022.09.24 更新
 
 ## 敬请期待
 

@@ -6,6 +6,7 @@ import BaseError, { warn, error } from '../exception/error'
 export function imgWaterMarker(config: ConfigParams): Promise<string> {
 	return new Promise(async (resolve, reject) => {
 		checkConfig(config, reject)
+		const { canvas, ctx } = createCanvas()
 		const {
 			src,
 			text,
@@ -19,9 +20,9 @@ export function imgWaterMarker(config: ConfigParams): Promise<string> {
 		} = config
 		const img = await createImgInstance({
 			source: src,
+			canvas,
 			onError: () => error('注意-一个无法打开的图片资源'),
 		})
-		const { canvas, ctx } = createCanvas()
 		const { width, height } = img
 		canvas.width = width
 		canvas.height = height
@@ -124,6 +125,7 @@ function drawText(
 	if (type === 'fill') {
 		ctx.fillText(text || 'watermark', positionWidth, positionHeight)
 	} else {
+		// 微信小程序下 strokeText 失效
 		ctx.strokeText(text || 'watermark', positionWidth, positionHeight)
 	}
 

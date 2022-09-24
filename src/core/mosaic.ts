@@ -8,11 +8,12 @@ export function mosaic({
 	size = 8,
 }: MosaicConfig): Promise<string> {
 	return new Promise(async (resolve, reject) => {
+		const { canvas, ctx } = createCanvas()
 		const img = await createImgInstance({
 			source: src,
+			canvas,
 			onError: () => error('注意-一个无法打开的图片资源'),
 		})
-		const { canvas, ctx } = createCanvas()
 		const { width, height } = img
 		canvas.width = width
 		canvas.height = height

@@ -33,6 +33,7 @@ export function QRcode({
 		if (src) {
 			const img = await createImgInstance({
 				source: src,
+				canvas,
 				onError: () => error('注意-一个无法打开的图片资源'),
 			})
 			ctx.drawImage(

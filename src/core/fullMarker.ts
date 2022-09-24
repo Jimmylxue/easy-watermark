@@ -16,11 +16,12 @@ export function fullMarker(config: TFullMarkerParams): Promise<string> {
 			rotate = 0,
 			type = 'fill',
 		} = config
+		const { canvas, ctx } = createCanvas()
 		const img = await createImgInstance({
 			source: src,
+			canvas,
 			onError: () => error('注意-一个无法打开的图片资源'),
 		})
-		const { canvas, ctx } = createCanvas()
 		const { width, height } = img
 		canvas.width = width
 		canvas.height = height
