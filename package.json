@@ -1,31 +1,31 @@
 {
-  "name": "esay-watermark",
-  "version": "1.1.6",
-  "description": "watermark 是一个基于 canvas 的简单的生成自定义水印、马赛克、二维码、高斯模糊等的插件，轻量、灵活、配置简单是它的特点。",
-  "main": "index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "dev": "webpack-dev-server"
-  },
-  "keywords": [],
-  "author": "Jimmyxuexue <1002661758@qq.com> (https://github.com/Jimmylxue)",
-  "license": "ISC",
-  "devDependencies": {
-    "@babel/core": "^7.15.8",
-    "@babel/polyfill": "^7.12.1",
-    "@babel/preset-env": "^7.15.8",
-    "@babel/preset-typescript": "^7.15.0",
-    "@types/qrcodejs": "^1.0.0",
-    "babel-loader": "^8.2.3",
-    "html-webpack-plugin": "^5.4.0",
-    "terser-webpack-plugin": "^5.2.4",
-    "ts-loader": "^9.3.1",
-    "typescript": "^4.7.4",
-    "webpack": "^5.59.1",
-    "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.6.0"
-  },
-  "dependencies": {}
+	"name": "esay-watermark",
+	"version": "1.1.7",
+	"description": "watermark 是一个基于 canvas 的简单的生成自定义水印、马赛克、二维码、高斯模糊等的插件，轻量、灵活、配置简单是它的特点。",
+	"main": "index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "webpack",
+		"dev": "webpack-dev-server"
+	},
+	"keywords": [],
+	"author": "Jimmyxuexue <1002661758@qq.com> (https://github.com/Jimmylxue)",
+	"license": "ISC",
+	"devDependencies": {
+		"@babel/core": "^7.15.8",
+		"@babel/polyfill": "^7.12.1",
+		"@babel/preset-env": "^7.15.8",
+		"@babel/preset-typescript": "^7.15.0",
+		"@types/qrcodejs": "^1.0.0",
+		"babel-loader": "^8.2.3",
+		"html-webpack-plugin": "^5.4.0",
+		"terser-webpack-plugin": "^5.2.4",
+		"ts-loader": "^9.3.1",
+		"typescript": "^4.7.4",
+		"webpack": "^5.59.1",
+		"webpack-cli": "^4.9.1",
+		"webpack-dev-server": "^4.6.0"
+	},
+	"dependencies": {}
 }

@@ -249,7 +249,6 @@ var utils_1 = __webpack_require__(5);
 function createCanvas() {
     var canvas, ctx;
     if ((0, utils_1.isMiniProgram)()) {
-        alert(111);
         canvas = wx.createOffscreenCanvas({ type: '2d' });
         ctx = canvas.getContext('2d');
     }
@@ -375,10 +374,10 @@ function gaussBlur(imgData, radius) {
 }
 exports.gaussBlur = gaussBlur;
 function isMiniProgram() {
-    var ua = navigator.userAgent.toLowerCase();
-    var isWeixin = ua.indexOf('micromessenger') !== -1;
-    console.log(1111);
-    if (!!(wx && (wx === null || wx === void 0 ? void 0 : wx.openLocation))) {
+    // const ua = navigator.userAgent.toLowerCase()
+    // const isWeixin = ua.indexOf('micromessenger') !== -1
+    // @ts-ignore
+    if (window.wx) {
         return true;
     }
     else {
@@ -971,7 +970,7 @@ var canvasInstance_1 = __webpack_require__(4);
 var imgInstance_1 = __webpack_require__(6);
 function rotate(_a) {
     var _this = this;
-    var src = _a.src, rotate = _a.rotate, _b = _a.output, output = _b === void 0 ? 'jpeg' : _b;
+    var src = _a.src, rotate = _a.rotate, _b = _a.output, output = _b === void 0 ? 'png' : _b, symmetric = _a.symmetric;
     return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
         var _a, canvas, ctx, img, width, height, rectCenterPoint;
         return __generator(this, function (_b) {
@@ -981,17 +980,36 @@ function rotate(_a) {
                     return [4 /*yield*/, (0, imgInstance_1.createImgInstance)({
                             source: src,
                             canvas: canvas,
-                            onError: function () { return (0, error_1.error)('注意-一个无法打开的图片资源'); },
+                            onError: function () {
+                                (0, error_1.error)('注意-一个无法打开的图片资源');
+                                reject('注意-一个无法打开的图片资源');
+                            },
                         })];
                 case 1:
                     img = _b.sent();
                     width = img.width, height = img.height;
-                    ctx.drawImage(img, 0, 0, width, height);
+                    canvas.width = width;
+                    canvas.height = height;
                     rectCenterPoint = {
                         x: width / 2,
                         y: height / 2,
                     };
+                    ctx.translate(rectCenterPoint.x, rectCenterPoint.y);
                     ctx.rotate((rotate * Math.PI) / 180); // 处理旋转角度
+                    ctx.translate(-rectCenterPoint.x, -rectCenterPoint.y);
+                    ctx.drawImage(img, 0, 0, width, height);
+                    if (symmetric) {
+                        if (symmetric === 'row') {
+                            onReverseRow(canvas, ctx);
+                        }
+                        else if (symmetric === 'column') {
+                            onReverseColumn(canvas, ctx);
+                        }
+                        else {
+                            (0, error_1.error)('注意-错误的 symmetric 参数');
+                            reject('注意-错误的 symmetric 参数');
+                        }
+                    }
                     resolve(canvas.toDataURL("image/".concat(output)));
                     return [2 /*return*/];
             }
@@ -999,6 +1017,55 @@ function rotate(_a) {
     }); });
 }
 exports.rotate = rotate;
+function onReverseColumn(canvas, ctx) {
+    var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    var data = imgData.data;
+    var w = canvas.width * 4;
+    for (var i = 0; i < data.length; i += 4) {
+        var r = data[i];
+        var g = data[i + 1];
+        var b = data[i + 2];
+        var a = data[i + 3];
+        // 左右等比位置的像素交换
+        if (i % w < w / 2) {
+            var newI = i + (w - (i % w) * 2);
+            data[i] = data[newI];
+            data[i + 1] = data[newI + 1];
+            data[i + 2] = data[newI + 2];
+            data[i + 3] = data[newI + 3];
+            data[newI] = r;
+            data[newI + 1] = g;
+            data[newI + 2] = b;
+            data[newI + 3] = a;
+        }
+    }
+    ctx.putImageData(imgData, 0, 0);
+}
+function onReverseRow(canvas, ctx) {
+    var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    var data = imgData.data;
+    var h = canvas.height;
+    var w = canvas.width;
+    var middleAxle /*中轴*/ = Math.floor(h / 2), rowAisles = w * 4;
+    // 2.遍历总行数一半的每一行作为外循环(向下取整)
+    for (var curRow = 0; curRow < middleAxle; curRow++) {
+        //
+        var aisleStart /*开始的通道位置*/ = curRow * rowAisles, mirrorStart /*中轴对称的开始位置*/ = (h - curRow - 1) * rowAisles;
+        // 3.遍历当前行的列作为内循环,把列的每个通道按照水平轴对称和镜像里的通道互换
+        for (; aisleStart < rowAisles * (curRow + 1); aisleStart += 4, mirrorStart += 4) {
+            var tr = data[aisleStart], tg = data[aisleStart + 1], tb = data[aisleStart + 2], ta = data[aisleStart + 3];
+            data[aisleStart] = data[mirrorStart];
+            data[aisleStart + 1] = data[mirrorStart + 1];
+            data[aisleStart + 2] = data[mirrorStart + 2];
+            data[aisleStart + 3] = data[mirrorStart + 3];
+            data[mirrorStart] = tr;
+            data[mirrorStart + 1] = tg;
+            data[mirrorStart + 2] = tb;
+            data[mirrorStart + 3] = ta;
+        }
+    }
+    ctx.putImageData(imgData, 0, 0);
+}
 
 
 /***/ })

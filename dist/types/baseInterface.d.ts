@@ -54,5 +54,6 @@ export interface TRotateConfig {
     src: string;
     rotate: number;
     output?: TOutputType;
+    symmetric?: 'row' | 'column';
 }
 export {};

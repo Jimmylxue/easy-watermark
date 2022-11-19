@@ -1,4 +1,3 @@
-
 <br>
 
 <h1 align="center">Welcome to watermark 👋</h1>
@@ -6,6 +5,8 @@
 <br>
 
 watermark 是一个多平台的（支持 H5 和微信小程序），基于 canvas 的简单的生成自定义水印、马赛克、二维码、高斯模糊等的插件，轻量、灵活、配置简单是它的特点。
+
+开发文档: [传送门](http://www.jimmyxuexue.top:999/watermark/guide/introduce.html)
 
 GitHub: [传送门](https://github.com/Jimmylxue/easy-watermark)
 
@@ -18,7 +19,6 @@ GitHub: [传送门](https://github.com/Jimmylxue/easy-watermark)
 (如果觉得不错 👍，给个 star ⭐ 吧，你的认可是我最大的动力 ！)
 
 ## 效果
-
 
 **fullMarker 全局平铺水印**
 
@@ -73,7 +73,7 @@ GitHub: [传送门](https://github.com/Jimmylxue/easy-watermark)
 - [x] 所有 API 兼容微信小程序
 
   > 2022.09.24 更新
-  
+
 - [x] 新增旋转、镜像`rotate`
 
 ## 敬请期待

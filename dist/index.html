@@ -8,6 +8,7 @@
 	</head>
 	<body>
 		<script src="watermark.js"></script>
+		<script src="watermark.min.js"></script>
 		<img id="img2" alt="" />
 		<br />
 		<img id="fullMarker" alt="" />
@@ -49,7 +50,15 @@
 
 		<div class="rotate">
 			<h3>rotate</h3>
+			<img
+				id="rotate"
+				alt="rotate"
+				src="https://avatars.githubusercontent.com/u/65758455?v=4"
+			/>
 			<img id="rotate1" alt="rotate" />
+			<img id="rotate2" alt="rotate" />
+			<img id="rotate3" alt="rotate" />
+			<img id="rotate4" alt="rotate" />
 		</div>
 
 		<script>
@@ -62,6 +71,9 @@
 			let QRcode2 = document.getElementById('QRcode2')
 			let fullMarker1 = document.getElementById('fullMarker')
 			let rotate1 = document.getElementById('rotate1')
+			let rotate2 = document.getElementById('rotate2')
+			let rotate3 = document.getElementById('rotate3')
+			let rotate4 = document.getElementById('rotate4')
 
 			const { marker, mosaic, blur, QRcode, fullMarker, rotate } = waterMarker
 
@@ -144,10 +156,53 @@
 			rotate({
 				src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
 				rotate: 90,
-			}).then(source => {
-				rotate1.src = source
+				output: 'png',
+				// symmetric: 'column',
 			})
+				.then(source => {
+					rotate1.src = source
+				})
+				.catch(err => {
+					console.log('eee', err)
+				})
+
+			rotate({
+				src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
+				rotate: 90,
+				output: 'png',
+				symmetric: 'column',
+			})
+				.then(source => {
+					rotate2.src = source
+				})
+				.catch(err => {
+					console.log('eee', err)
+				})
+
+			rotate({
+				src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
+				rotate: 90,
+				output: 'png',
+				symmetric: 'row',
+			})
+				.then(source => {
+					rotate3.src = source
+				})
+				.catch(err => {
+					console.log('eee', err)
+				})
+
+			rotate({
+				src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
+				rotate: -30,
+				output: 'png',
+			})
+				.then(source => {
+					rotate4.src = source
+				})
+				.catch(err => {
+					console.log('eee', err)
+				})
 		</script>
-		<script src="watermark.js"></script>
-	</body>
+	<script src="watermark.js"></script><script src="watermark.min.js"></script></body>
 </html>
