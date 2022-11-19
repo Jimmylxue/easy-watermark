@@ -59,3 +59,10 @@ export interface TQrCodeConfig {
 	correctLevel?: number // 错误级别
 	output?: TOutputType // 输出资源
 }
+
+export interface TRotateConfig {
+	src: string
+	rotate: number // 角度
+	output?: TOutputType // 输出类型 目前支持 png jpeg
+	symmetric?: 'row' | 'column'
+}

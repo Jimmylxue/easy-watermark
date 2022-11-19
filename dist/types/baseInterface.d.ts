@@ -50,4 +50,9 @@ export interface TQrCodeConfig {
     correctLevel?: number;
     output?: TOutputType;
 }
+export interface TRotateConfig {
+    src: string;
+    rotate: number;
+    output?: TOutputType;
+}
 export {};

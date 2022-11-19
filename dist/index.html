@@ -8,7 +8,6 @@
 	</head>
 	<body>
 		<script src="watermark.js"></script>
-		<script src="watermark.min.js"></script>
 		<img id="img2" alt="" />
 		<br />
 		<img id="fullMarker" alt="" />
@@ -48,6 +47,11 @@
 			<img id="QRcode2" alt="QRcode" />
 		</div>
 
+		<div class="rotate">
+			<h3>rotate</h3>
+			<img id="rotate1" alt="rotate" />
+		</div>
+
 		<script>
 			let img = document.getElementById('img')
 			let img2 = document.getElementById('img2')
@@ -57,8 +61,9 @@
 			let QRcode1 = document.getElementById('QRcode1')
 			let QRcode2 = document.getElementById('QRcode2')
 			let fullMarker1 = document.getElementById('fullMarker')
+			let rotate1 = document.getElementById('rotate1')
 
-			const { marker, mosaic, blur, QRcode, fullMarker } = waterMarker
+			const { marker, mosaic, blur, QRcode, fullMarker, rotate } = waterMarker
 
 			let config = {
 				src: 'http://jimmyxx.oss-cn-beijing.aliyuncs.com/lot.png',
@@ -135,6 +140,14 @@
 			}).then(source => {
 				fullMarker1.src = source
 			})
+
+			rotate({
+				src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
+				rotate: 90,
+			}).then(source => {
+				rotate1.src = source
+			})
 		</script>
-	<script src="watermark.js"></script><script src="watermark.min.js"></script></body>
+		<script src="watermark.js"></script>
+	</body>
 </html>

@@ -139,9 +139,10 @@ export function gaussBlur(imgData: any, radius: number) {
 }
 
 export function isMiniProgram() {
-	const ua = navigator.userAgent.toLowerCase()
-	const isWeixin = ua.indexOf('micromessenger') !== -1
-	if (!!wx?.openLocation) {
+	// const ua = navigator.userAgent.toLowerCase()
+	// const isWeixin = ua.indexOf('micromessenger') !== -1
+	// @ts-ignore
+	if (window.wx) {
 		return true
 	} else {
 		return false
