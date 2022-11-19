@@ -8,7 +8,7 @@ export function rotate({
 	rotate,
 	output = 'png',
 	symmetric,
-}: TRotateConfig) {
+}: TRotateConfig): Promise<string> {
 	return new Promise(async (resolve, reject) => {
 		const { canvas, ctx } = createCanvas()
 		const img = await createImgInstance({

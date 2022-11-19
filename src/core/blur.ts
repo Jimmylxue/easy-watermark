@@ -4,7 +4,11 @@ import { createCanvas } from '../instance/canvasInstance'
 import { error } from '../exception/error'
 import { gaussBlur } from '../utils/utils'
 
-export function blur({ src, output = 'jpeg', radius = 5 }: BlurConfig) {
+export function blur({
+	src,
+	output = 'jpeg',
+	radius = 5,
+}: BlurConfig): Promise<string> {
 	return new Promise(async (resolve, reject) => {
 		const { canvas, ctx } = createCanvas()
 		const img = await createImgInstance({
