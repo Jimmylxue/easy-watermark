@@ -1,6 +1,6 @@
 {
 	"name": "esay-watermark",
-	"version": "1.1.8",
+	"version": "1.1.9",
 	"description": "watermark 是一个基于 canvas 的简单的生成自定义水印、马赛克、二维码、高斯模糊等的插件，轻量、灵活、配置简单是它的特点。",
 	"main": "index.js",
 	"types": "dist/index.d.ts",
