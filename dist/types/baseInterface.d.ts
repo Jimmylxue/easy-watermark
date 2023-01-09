@@ -56,4 +56,12 @@ export interface TRotateConfig {
     output?: TOutputType;
     symmetric?: 'row' | 'column';
 }
+export declare enum TFilterType {
+    '黑白滤镜' = 0
+}
+export interface TFilterConfig {
+    src: string;
+    type: TFilterType;
+    output?: TOutputType;
+}
 export {};

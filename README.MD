@@ -4,7 +4,7 @@
 
 <br>
 
-watermark 是一个多平台的（支持 H5 和微信小程序），基于 canvas 的简单的生成自定义水印、马赛克、二维码、高斯模糊等的插件，轻量、灵活、配置简单是它的特点。
+watermark 是一个多平台的（支持 H5 和微信小程序），基于 canvas 的简单的生成自定义水印、马赛克、二维码、高斯模糊、滤镜等的插件，轻量、灵活、配置简单是它的特点。
 
 开发文档: [传送门](http://www.jimmyxuexue.top:999/watermark/guide/introduce.html)
 
@@ -48,33 +48,11 @@ GitHub: [传送门](https://github.com/Jimmylxue/easy-watermark)
 
 ![旋转-镜像](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20221119110657033.png)
 
-## 更新日志
+**滤镜**
 
-- [x] 新增 rotate 旋转角度
+- 黑白滤镜
 
-  > 2022.06.02 更新
-
-- [x] 新增 type 文字书写方式 “描边”|“填充”
-
-  > 2022.07.01 更新
-
-- [x] 新增 `mosaic ` 图片转马赛克
-
-  > 2022.07.02 更新
-
-- [x] 新增 `blur` 高斯模糊、`QRcode`二维码
-
-  > 2022.09.17 更新
-
-- [x] 新增 `fullMarker` 平铺水印
-
-  > 2022.09.18 更新
-
-- [x] 所有 API 兼容微信小程序
-
-  > 2022.09.24 更新
-
-- [x] 新增旋转、镜像`rotate`
+  ![黑白滤镜](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20230109095911982.png)
 
 ## 敬请期待
 

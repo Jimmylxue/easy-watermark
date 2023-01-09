@@ -61,6 +61,11 @@
 			<img id="rotate4" alt="rotate" />
 		</div>
 
+		<div class="filter">
+			<h3>黑白滤镜</h3>
+			<img id="filter1" alt="rotate" />
+		</div>
+
 		<script>
 			let img = document.getElementById('img')
 			let img2 = document.getElementById('img2')
@@ -74,8 +79,10 @@
 			let rotate2 = document.getElementById('rotate2')
 			let rotate3 = document.getElementById('rotate3')
 			let rotate4 = document.getElementById('rotate4')
+			let filter1 = document.getElementById('filter1')
 
-			const { marker, mosaic, blur, QRcode, fullMarker, rotate } = waterMarker
+			const { marker, mosaic, blur, QRcode, fullMarker, rotate, filter } =
+				waterMarker
 
 			let config = {
 				src: 'http://jimmyxx.oss-cn-beijing.aliyuncs.com/lot.png',
@@ -203,6 +210,14 @@
 				.catch(err => {
 					console.log('eee', err)
 				})
+
+			filter({
+				src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
+				output: 'png',
+				type: 0,
+			}).then(source => {
+				filter1.src = source
+			})
 		</script>
 	<script src="watermark.js"></script><script src="watermark.min.js"></script></body>
 </html>

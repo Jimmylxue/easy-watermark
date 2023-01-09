@@ -66,3 +66,13 @@ export interface TRotateConfig {
 	output?: TOutputType // 输出类型 目前支持 png jpeg
 	symmetric?: 'row' | 'column'
 }
+
+export enum TFilterType {
+	'黑白滤镜',
+}
+
+export interface TFilterConfig {
+	src: string
+	type: TFilterType
+	output?: TOutputType // 输出类型 目前支持 png jpeg
+}
