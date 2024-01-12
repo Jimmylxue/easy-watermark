@@ -18,6 +18,8 @@ export const enum Position {
 
 export type TPositionConst = keyof typeof Position
 
+export type TextType = 'fill' | 'stroke'
+
 export type ConfigParams = {
 	src: string // 图片地址
 	text: string // 水印文字
@@ -27,7 +29,7 @@ export type ConfigParams = {
 	output?: TOutputType // 输出类型 目前支持 png jpeg
 	position?: TPositionConst // 水印方位
 	rotate?: number // 角度
-	type?: 'fill' | 'stroke'
+	type?: TextType
 }
 
 export type TFullMarkerParams = Omit<ConfigParams, 'position'>

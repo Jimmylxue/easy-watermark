@@ -14,6 +14,7 @@ export declare const enum Position {
     RIGHT_BOTTOM = 9
 }
 export declare type TPositionConst = keyof typeof Position;
+export declare type TextType = 'fill' | 'stroke';
 export declare type ConfigParams = {
     src: string;
     text: string;
@@ -23,7 +24,7 @@ export declare type ConfigParams = {
     output?: TOutputType;
     position?: TPositionConst;
     rotate?: number;
-    type?: 'fill' | 'stroke';
+    type?: TextType;
 };
 export declare type TFullMarkerParams = Omit<ConfigParams, 'position'>;
 export interface textBound {

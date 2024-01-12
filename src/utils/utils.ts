@@ -8,7 +8,7 @@ export const getTextBound = (
 	let baseMsg = ctx.measureText(font)
 	return {
 		width: baseMsg.width,
-		height: baseMsg.actualBoundingBoxDescent,
+		height: baseMsg.actualBoundingBoxAscent + baseMsg.actualBoundingBoxDescent,
 	}
 }
 

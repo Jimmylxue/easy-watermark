@@ -31,6 +31,7 @@ export function imgWaterMarker(config: ConfigParams): Promise<string> {
 		let lineGradient = ctx.createLinearGradient(100, 200, 200, 200)
 		lineGradient.addColorStop(1, color)
 		ctx.fillStyle = lineGradient
+		ctx.strokeStyle = lineGradient
 		drawText(ctx, text, position, padding, width, height, type, rotate)
 		resolve(canvas.toDataURL(`image/${output}`))
 	})
@@ -73,7 +74,7 @@ function drawText(
 	switch (getPositionType(position)) {
 		case Position.LEFT_TOP:
 			positionWidth = padding
-			positionHeight = padding
+			positionHeight = padding + textMsg.height
 			break
 		case Position.LEFT_CENTER:
 			positionWidth = padding
@@ -81,11 +82,11 @@ function drawText(
 			break
 		case Position.LEFT_BOTTOM:
 			positionWidth = padding
-			positionHeight = height - textMsg.height - padding
+			positionHeight = height - padding
 			break
 		case Position.CENTER_TOP:
 			positionWidth = width / 2 - textMsg.width / 2
-			positionHeight = padding
+			positionHeight = padding + textMsg.height
 			break
 		case Position.CENTER:
 			positionWidth = width / 2 - textMsg.width / 2
@@ -93,11 +94,11 @@ function drawText(
 			break
 		case Position.CENTER_BOTTOM:
 			positionWidth = width / 2 - textMsg.width / 2
-			positionHeight = height - textMsg.height - padding
+			positionHeight = height - padding
 			break
 		case Position.RIGHT_TOP:
 			positionWidth = width - textMsg.width - padding
-			positionHeight = padding
+			positionHeight = padding + textMsg.height
 			break
 		case Position.RIGHT_CENTER:
 			positionWidth = width - textMsg.width - padding
@@ -105,7 +106,7 @@ function drawText(
 			break
 		case Position.RIGHT_BOTTOM:
 			positionWidth = width - textMsg.width - padding
-			positionHeight = height - textMsg.height - padding
+			positionHeight = height - padding
 			break
 	}
 	if (rotate) {

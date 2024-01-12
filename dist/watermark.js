@@ -129,6 +129,7 @@ function imgWaterMarker(config) {
                     lineGradient = ctx.createLinearGradient(100, 200, 200, 200);
                     lineGradient.addColorStop(1, color);
                     ctx.fillStyle = lineGradient;
+                    ctx.strokeStyle = lineGradient;
                     drawText(ctx, text, position, padding, width, height, type, rotate);
                     resolve(canvas.toDataURL("image/".concat(output)));
                     return [2 /*return*/];
@@ -165,7 +166,7 @@ function drawText(ctx, text, position, padding, width, height, type, rotate) {
     switch ((0, utils_1.getPositionType)(position)) {
         case 1 /* Position.LEFT_TOP */:
             positionWidth = padding;
-            positionHeight = padding;
+            positionHeight = padding + textMsg.height;
             break;
         case 2 /* Position.LEFT_CENTER */:
             positionWidth = padding;
@@ -173,11 +174,11 @@ function drawText(ctx, text, position, padding, width, height, type, rotate) {
             break;
         case 3 /* Position.LEFT_BOTTOM */:
             positionWidth = padding;
-            positionHeight = height - textMsg.height - padding;
+            positionHeight = height - padding;
             break;
         case 4 /* Position.CENTER_TOP */:
             positionWidth = width / 2 - textMsg.width / 2;
-            positionHeight = padding;
+            positionHeight = padding + textMsg.height;
             break;
         case 5 /* Position.CENTER */:
             positionWidth = width / 2 - textMsg.width / 2;
@@ -185,11 +186,11 @@ function drawText(ctx, text, position, padding, width, height, type, rotate) {
             break;
         case 6 /* Position.CENTER_BOTTOM */:
             positionWidth = width / 2 - textMsg.width / 2;
-            positionHeight = height - textMsg.height - padding;
+            positionHeight = height - padding;
             break;
         case 7 /* Position.RIGHT_TOP */:
             positionWidth = width - textMsg.width - padding;
-            positionHeight = padding;
+            positionHeight = padding + textMsg.height;
             break;
         case 8 /* Position.RIGHT_CENTER */:
             positionWidth = width - textMsg.width - padding;
@@ -197,7 +198,7 @@ function drawText(ctx, text, position, padding, width, height, type, rotate) {
             break;
         case 9 /* Position.RIGHT_BOTTOM */:
             positionWidth = width - textMsg.width - padding;
-            positionHeight = height - textMsg.height - padding;
+            positionHeight = height - padding;
             break;
     }
     if (rotate) {
@@ -276,7 +277,7 @@ var getTextBound = function (ctx, font) {
     var baseMsg = ctx.measureText(font);
     return {
         width: baseMsg.width,
-        height: baseMsg.actualBoundingBoxDescent,
+        height: baseMsg.actualBoundingBoxAscent + baseMsg.actualBoundingBoxDescent,
     };
 };
 exports.getTextBound = getTextBound;
