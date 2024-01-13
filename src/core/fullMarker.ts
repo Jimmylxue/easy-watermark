@@ -30,6 +30,7 @@ export function fullMarker(config: TFullMarkerParams): Promise<string> {
 		let lineGradient = ctx.createLinearGradient(100, 200, 200, 200)
 		lineGradient.addColorStop(1, color)
 		ctx.fillStyle = lineGradient
+		ctx.strokeStyle = lineGradient
 		drawText(ctx, text, padding, width, height, type, rotate)
 		resolve(canvas.toDataURL(`image/${output}`))
 	})
